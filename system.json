@@ -2,57 +2,32 @@
     "id":"inside-the-zone",
     "version": "0.0.1",
     "title":"Inside the zone",
+    "url": "https://github.com/BartZuidervaart/Inside-the-zone",
     "description": "A system to play the 'Inside the zone' game.",
-    "authors":["Bart Zuidervaart"],
-    "minimumCoreVersion":"10",
-    "compatibleCoreVersion":"10",
+    "authors":[
+        {
+            "name":"Bart Zuidervaart"
+        }
+        ],
     "esmodules": [
-        "inside-the-zone.js"
+        "module/main.js"
     ],
     "styles":[
-        "inside-the-zone.css"
+        "styles/css/inside-the-zone.css"
     ],
     "languages":[
-
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
     ],
+    "compatibility": {
+        "minimum": "10",
+        "verified": "10.291",
+        "maximum": "10"
+      },
     "gridDistance":2,
     "gridUnits":"m",
     "primaryTokenAttribute":"HP"
 }
-
-
-{
-    "id": "worldbuilding",
-    "version": "0.7.2",
-    "title": "Simple World-Building",
-    "url": "https://gitlab.com/foundrynet/worldbuilding/",
-    "description": "A minimalist game system which provides configurable Actor and Item templates to support free-form system agnostic game-play.",
-    "license": "LICENSE.txt",
-    "authors": [
-      {
-        "name": "Atropos",
-        "url": "https://foundryvtt.com"
-      }
-    ],
-    "esmodules": ["module/simple.js"],
-    "styles": ["styles/simple.css"],
-    "packs": [],
-    "languages": [
-      {
-        "lang": "en",
-        "name": "English",
-        "path": "lang/en.json"
-      }
-    ],
-    "compatibility": {
-      "minimum": "10",
-      "verified": "10.288",
-      "maximum": "10"
-    },
-    "gridDistance": 5,
-    "gridUnits": "ft",
-    "primaryTokenAttribute": "health",
-    "secondaryTokenAttribute": "power",
-    "manifest": "https://raw.githubusercontent.com/foundryvtt/worldbuilding/master/system.json",
-    "download": "https://github.com/foundryvtt/worldbuilding/archive/refs/tags/release-072.zip"
-  }

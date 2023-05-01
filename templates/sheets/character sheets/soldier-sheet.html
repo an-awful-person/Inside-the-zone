@@ -1,0 +1,156 @@
+<form class="actor-sheet {{cssClass}}" autocomplete="off">
+    <header class="sheet-header" style="align-items:normal">
+        <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" class="avatar-image"/>
+        <img src="{{systemData.avatarBorder}}" class="avatar-image-overlay"/>
+        <img src="{{systemData.stressImage}}" class="avatar-image-overlay" style="z-index:12"/>
+        <img src="{{systemData.sanityBackground}}" class="avatar-image-overlay" style="z-index:13"/>
+        <img src="{{systemData.sanityImage}}" class="avatar-image-overlay" style="z-index:14"/>
+        <img src="{{systemData.healthImage}}" class="avatar-image-overlay" style="z-index:15"/>
+        <div class="content" style="margin-left:330px; margin-right:20px">
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'Name' }}" style="color:white" /></h1>
+                    <p style="color:#86bb15; margin: 0px 10px 0px 10px">Soldier</p>
+                </div>
+                <div class="ten wide column">
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <button class="ui right labeled icon button">
+                                <i class="icon xdy">2d6</i>
+                                Physical
+                            </button>
+                        </div>
+                        <div class="eight wide column">
+                            <button class="ui right labeled icon button">
+                                <i class="icon xdy">2d6</i>
+                                Ballistic
+                            </button>
+                        </div>
+                        <div class="eight wide column">
+                            <button class="ui right labeled icon button">
+                                <i class="icon xdy">2d6</i>
+                                Burning
+                            </button>
+                        </div>
+                        <div class="eight wide column">
+                            <button class="ui right labeled icon button">
+                                <i class="icon xdy">2d6</i>
+                                Freezing
+                            </button>
+                        </div>
+                        <div class="eight wide column">
+                            <button class="ui right labeled icon button">
+                                <i class="icon xdy">2d6</i>
+                                Decay
+                            </button>
+                        </div>
+                        <div class="eight wide column">
+                            <button class="ui right labeled icon button">
+                                <i class="icon xdy">2d6</i>
+                                Mind
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="six wide column">
+                    <div class="ui grid">
+                        <div class="sixteen wide column">
+                            <!-- <p style="color:#86bb15; text-align:center; margin-bottom:5px">health points</p> -->
+                            <div class="ui icon buttons" style="width:100%" data-tooltip="health points" data-tooltip-direction="UP">
+                                <button class="ui button" style="flex:unset;" id="decrease-health-button">
+                                    <i class="left arrow icon"></i>
+                                </button>
+                                <button class="ui disabled button tooltip" style="flex:unset;">
+                                    {{actor.system.health.value}}/{{actor.system.health.max}}
+                                </button>
+                                <button class="ui button number-input-button" style="flex:unset;" id="increase-health-button">
+                                    <i class="right arrow icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="sixteen wide column">
+                            <!-- <p style="color:#86bb15; text-align:center; margin-bottom:5px; margin-top:10px">sanity points</p> -->
+                            <div class="ui icon buttons" style="width:100%"  data-tooltip="sanity points" data-tooltip-direction="UP">
+                                <button class="ui button" style="flex:unset;" id="decrease-sanity-button">
+                                    <i class="left arrow icon"></i>
+                                </button>
+                                <button class="ui disabled button" style="flex:unset;">
+                                    {{actor.system.sanity.value}}/{{actor.system.sanity.max}}
+                                </button>
+                                <button class="ui button" style="flex:unset;" id="increase-sanity-button">
+                                    <i class="right arrow icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="sixteen wide column">
+                            <!-- <p style="color:#86bb15; text-align:center; margin-bottom:5px; margin-top:10px">stress points</p> -->
+                            <div class="ui icon buttons" style="width:100%"  data-tooltip="stress points" data-tooltip-direction="UP">
+                                <button class="ui button" style="flex:unset;" id="decrease-stress-button">
+                                    <i class="left arrow icon"></i>
+                                </button>
+                                <button class="ui disabled button" style="flex:unset;">
+                                    {{actor.system.stress.value}}/{{actor.system.stress.max}}
+                                </button>
+                                <button class="ui button" style="flex:unset;" id="increase-stress-button">
+                                    <i class="right arrow icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </header>
+
+    <div class="ui grid" style="margin:0px">
+        <div class="six wide column">
+            <h2>Equipment</h2>
+            <div class="ui grid">
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        LEFT HAND
+                    </div>
+                </div>
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        RIGHT HAND
+                    </div>
+                </div>
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        BODY
+                    </div>
+                </div>
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        HEAD
+                    </div>
+                </div>
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        AUGMENTATION ARTIFACT
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ten wide column">
+            <h2>Inventory</h2>
+            <div class="ui grid">
+                <div class="seven column row equipment-button">
+                    <div class="column equipment-button-component">1</div>
+                    <div class="column equipment-button-component">2</div>
+                    <div class="column equipment-button-component">3</div>
+                    <div class="column equipment-button-component">4</div>
+                    <div class="column equipment-button-component">5</div>
+                    <div class="column equipment-button-component">6</div>
+                    <div class="column equipment-button-component">7</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

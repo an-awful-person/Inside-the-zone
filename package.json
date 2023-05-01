@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "fomantic-ui": "^2.9.2",
+    "fomantic-ui-css": "^2.9.2",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.62.1"
+  },
+  "devDependencies": {
+    "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
+    "typescript": "^5.0.4"
+  }
+}

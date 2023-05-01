@@ -1,4 +1,92 @@
 {
-    "Actor":{},
-    "Item":{}
+    "Actor":{
+        "types": ["soldier", "stalker", "scientist", "medium"],
+        "templates":{
+            "baseCharacter":{
+                "health":{
+                    "value":5,
+                    "min":0,
+                    "max":5
+                },
+                "stress":{
+                    "value":10,
+                    "min":0,
+                    "max":10
+                },
+                "sanity":{
+                    "value":5,
+                    "min":0,
+                    "max":5
+                },
+                "preps":[],
+                "conditions":[],
+                "actions":[],
+                "reactions":[],
+                "movement":20,
+                "skillpoints":0
+            }
+        },
+        "soldier": {
+            "templates":["baseCharacter"],
+            "backpack":{
+                "width":9,
+                "height":4,
+                "items":[]
+            },
+            "reactions":[
+                "suppressive fire"
+            ],
+            "conditions":[
+                "friend or foe"
+            ],
+            "skillpoints":5
+        },
+        "stalker": {
+            "templates":["baseCharacter"],
+            "backpack":{
+                "width":7,
+                "height":4,
+                "items":[]
+            },
+            "skillpoints":7,
+            "reaction":["fatal mistake"],
+            "conditions":["clueless"]
+        },
+        "scientist": {
+            "templates":["baseCharacter"],
+            "backpack":{
+                "width":7,
+                "height":7,
+                "items":[]
+            },
+            "skillpoints":10,
+            "reaction":["flash of mind"],
+            "conditions":["inconceivable"]
+        },
+        "medium": {
+            "templates":["baseCharacter"],
+            "backpack":{
+                "width":5,
+                "height":5,
+                "items":[]
+            },
+            "skillpoints":5,
+            "reaction":["psy support"],
+            "conditions":["unstable mind"]
+        }
+    },
+    "Item":{
+        "types": ["item"],
+        "templates":{
+            "baseItem":{
+                "broken":false,
+                "width":1,
+                "height":1,
+                "description":""
+            }
+        },
+        "item": {
+            "templates":["baseItem"]
+        }
+    }
 }

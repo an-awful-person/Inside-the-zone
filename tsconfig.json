@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target":"es5",
+        "module":"umd",
+        "moduleResolution": "node",
+        "strictNullChecks": true,
+        "types":["@league-of-foundry-developers/foundry-vtt-types"]
+    }
+}
