@@ -1,10 +1,11 @@
 import ITZItemSheet from "./sheets/ITZItemSheet.js";
-import ITZSoldierSheet from "./sheets/character sheets/ITZSoldierSheet.js"
+import ITZSoldierSheet from "./sheets/character sheets/ITZSoldierSheet.js";
 
 Hooks.once("init", async function(){
     console.log("Inside the zone | Initializing Inside the zone System");
-    initFomanticUI()
-    initSheets()    
+    initFomanticUI();
+    initSheets();
+    registerHandlebarsHelpers();  
 });
 
 function initSheets(){
@@ -40,4 +41,12 @@ function initFomanticUI() {
     myStyle.type="text/css";
     myStyle.href="../systems/inside-the-zone/styles/css/inside-the-zone.css";
     HEAD.appendChild(myStyle)
+}
+
+function registerHandlebarsHelpers() {
+    Handlebars.registerHelper("test", function() { console.log('test')})
+}
+
+function test(){
+    console.log('test function');
 }

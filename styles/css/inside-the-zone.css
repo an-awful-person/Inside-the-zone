@@ -1,11 +1,20 @@
 body {
     background:none;
-    --color-shadow-highlight: #d9ff87;
-    --color-shadow-primary: #86bb15;
-    --color-border-highlight:#d9ff87;
-    --color-border-highlight-alt: #86bb15;
-    --color-text-hyperlink: #d9ff87;
-
+    --stalker-highlight: #d9ff87;
+    --stalker-secondary: #86bb15;
+    --stalker-input-background: rgba(0,0,0,0.3);
+    --color-shadow-highlight: var(--stalker-highlight);
+    --color-shadow-primary: var(--stalker-secondary);
+    --color-border-highlight:var(--stalker-highlight);
+    --color-border-highlight-alt: var(--stalker-secondary);
+    --color-text-hyperlink: var(--stalker-highlight);
+    --color-text-dark-primary:#76a313;
+    --color-text-dark-secondary:#5a7c11;
+    --color-bg-option: #333;
+    --color-border-light-highlight: #222;
+    --color-border-light-primary: #333;
+    --color-border-light-secondary: #444;
+    --color-border-light-tertiary: #555;
 }
 
 a {
@@ -76,30 +85,42 @@ a:hover {
     content:none;
 }
 
+.header-image-collection{
+    position:relative;
+    flex:0.5 !important;
+    margin:auto;
+    justify-content:center;
+    display:flex;
+}
+
 .sheet header.sheet-header img.avatar-image {
-    width:300px;
-    height:300px;
+    width:200px;
+    height:200px;
     -webkit-mask-image: url("../../assets/img/avatar/mask.png");
     mask-image: url("../../assets/img/avatar/mask.png");
     -webkit-mask-size: auto 100%;
     mask-size: auto 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    position:absolute;
+    position:relative;
     z-index:9;
 }
 
 .sheet header.sheet-header img.avatar-image-overlay {
-    width:300px;
-    height:300px;
+    width:200px;
+    height:200px;
     position:absolute;
-    left:8px;
-    top:38px;
     z-index: 10;
 }
 
+h1 {
+    color:var(--stalker-highlight);
+    font-size:17px;
+}
+
 h2 {
-    color:#86bb15;
+    color:var(--stalker-secondary);
+    font-size:15px;
     border-bottom:unset;
 }
 
@@ -119,9 +140,110 @@ h2 {
     text-align:center;
     line-height: normal;
     box-shadow: 0px 0px 10px black;
-    background-color: rgba(0,0,0,0.3);
+    background-color: var(--stalker-input-background);
     border-radius:10px;
     display: flex;
     width:100%;
     height:100%;
 }
+
+@keyframes radioactive-glow {
+    0%   {color: #76a313;}
+    50%  {color: var(--stalker-highlight);}
+    100% {color: #76a313;}
+}
+
+.tabs .item.active {
+    animation-name: radioactive-glow;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+select {
+    color: var(--stalker-secondary);
+}
+
+button {
+    color: var(--stalker-highlight);
+    background-color: var(--stalker-input-background);
+    font-size:12px;
+}
+
+.directory .directory-header .header-search input{
+    background:rgba(0,0,0,0.5);
+}
+
+/* PROTECTION DICE */
+.ui[class*="right labeled"].icon.button:hover{
+    color:white !important;
+    text-shadow: 0 0 10px white !important;
+    box-shadow: 0 0 5px var(--stalker-secondary);
+    /* background: url(../../assets/img/rust\ metal\ texture.jpg); */
+    /* background-color:#444; */
+}
+
+.ui[class*="right labeled"].icon.button{
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size: 12px;
+    /* background: url(../../assets/img/rust\ metal\ texture\ final.jpg); */
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+    background-color:#222;
+    /* color:var(--stalker-secondary); */
+}
+
+.ui[class*="right labeled"].icon.button>.icon{
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size: 12px;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+    background-color:#333;
+    /* color:var(--stalker-secondary); */
+}
+
+.ui.grid>.column.protection-dice:not(.row){
+    padding:10px;
+}
+
+/* INCREASE/DECREASE BUTTONS */
+.ui.buttons:not(.basic):not(.inverted)>.button:not(.basic):not(.inverted){
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size: 12px;
+    /* background: url(../../assets/img/rust\ metal\ texture\ final.jpg); */
+    background-color:#444;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+    color:var(--stalker-secondary);
+}
+
+.ui.buttons:not(.basic):not(.inverted)>.button:not(.basic):not(.inverted):hover{
+    color:white;
+    box-shadow: 0 0 5px var(--stalker-secondary);
+    /* background: url(../../assets/img/rust\ metal\ texture.jpg); */
+    background-color:#777;
+}
+
+.ui.grid>.column.increase-decrease-button:not(.row) {
+    padding:5px;
+}
+
+/* */
+
+input {
+    background-color: var(--stalker-input-background);
+}
+
+input[type="text"] {
+    background-color: var(--stalker-input-background);
+}
+
+input[type="number"] {
+    background-color: var(--stalker-input-background);
+}
+
+input[type="checkbox"]{
+    background-color: var(--stalker-input-background);
+    color: var(--stalker-highlight);
+    accent-color: var(--stalker-input-background);
+}
+

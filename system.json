@@ -12,6 +12,9 @@
     "esmodules": [
         "module/main.js"
     ],
+    "scripts": [
+        "functions/roll.function.js"
+    ],
     "styles":[
         "styles/css/inside-the-zone.css"
     ],

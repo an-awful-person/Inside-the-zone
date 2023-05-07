@@ -23,7 +23,13 @@
                 "actions":[],
                 "reactions":[],
                 "movement":20,
-                "skillpoints":0
+                "skillpoints":0,
+                "equipment":{
+                    "leftHand":"",
+                    "rightHand":"",
+                    "body":"",
+                    "head":""
+                }
             }
         },
         "soldier": {
