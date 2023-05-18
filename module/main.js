@@ -44,9 +44,7 @@ function initFomanticUI() {
 }
 
 function registerHandlebarsHelpers() {
-    Handlebars.registerHelper("test", function() { console.log('test')})
-}
-
-function test(){
-    console.log('test function');
+    Handlebars.registerHelper("tab", function(value, list) {
+        return list[value];
+    })
 }

@@ -1,66 +1,73 @@
 <form class="actor-sheet {{cssClass}}" autocomplete="off">
     <header class="sheet-header" style="align-items:normal; min-height:260px">
         <div class="header-image-collection">
-            <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" class="avatar-image" />
+            <img src="{{actor.img}}" title="{{actor.name}}" class="avatar-image" />
             <img src="{{systemData.avatarBorder}}" class="avatar-image-overlay" />
             <img src="{{systemData.stressImage}}" class="avatar-image-overlay" style="z-index:12" />
             <img src="{{systemData.sanityBackground}}" class="avatar-image-overlay" style="z-index:13" />
-            <img src="{{systemData.sanityImage}}" class="avatar-image-overlay" style="z-index:14" />
-            <img src="{{systemData.healthImage}}" class="avatar-image-overlay" style="z-index:15" />
+            <img src="{{systemData.sanityImage}}" class="avatar-image-overlay {{actor.image_class.sanity}}" style="z-index:14" />
+            <img src="{{systemData.healthImage}}" class="avatar-image-overlay {{actor.image_class.health}}" style="z-index:15" />
+            <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" class="avatar-image-overlay" style="z-index:500; opacity: 0;"/>
         </div>
         <div class="content" style="margin-right:20px">
             <div class="ui grid">
                 <div class="ten wide column">
                     <h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'Name' }}"
-                            style="color:white" /></h1>
-                    <p style="color:#86bb15; margin: 0px 10px 0px 10px">Soldier</p>
+                            style="color:white"/></h1>
+                    <div class="ui grid">
+                        <div class="four wide column">
+                            <p style="color:#86bb15; margin: 0px 10px 0px 10px">Soldier</p>
+                        </div>
+                        <div class="twelve wide column">
+                            <input name="money" type="number" value="{{actor.system.money}}" placeholder="{{actor.system.money}}" style="width:80%"/> RU
+                        </div>
+                    </div>
                 </div>
                 <div class="six wide column">
                     <button id="actor-sanity-roll">sanity roll</button>
-                    <input name="money" type="number" value="200" />
                 </div>
                 <div class="ten wide column" style="padding-right:1.5rem">
                     <h2 style="text-align:center">Protective dice</h2>
                     <div class="ui grid">
                         <div class="eight wide column protection-dice">
-                            <button class="ui right labeled icon button"
+                            <button class="ui right labeled icon button" id="actor-physical-protection-roll"
                                 style="color:rgb(100,100,255); text-shadow: 0 0 10px blue">
-                                <i class="icon xdy">{{actor.protectiveDice.physical}}</i>
+                                <i class="icon xdy">{{actor.roll.physical.roll}}</i>
                                 Physical
                             </button>
                         </div>
                         <div class="eight wide column protection-dice">
-                            <button class="ui right labeled icon button"
+                            <button class="ui right labeled icon button" id="actor-ballistic-protection-roll"
                                 style="color:rgb(255,255,100); text-shadow: 0 0 10px yellow">
-                                <i class="icon xdy">{{actor.protectiveDice.ballistic}}</i>
+                                <i class="icon xdy">{{actor.roll.ballistic.roll}}</i>
                                 Ballistic
                             </button>
                         </div>
                         <div class="eight wide column protection-dice">
-                            <button class="ui right labeled icon button"
+                            <button class="ui right labeled icon button" id="actor-burning-protection-roll"
                                 style="color:rgb(255,100,100); text-shadow: 0 0 10px red">
-                                <i class="icon xdy">{{actor.protectiveDice.burning}}</i>
+                                <i class="icon xdy">{{actor.roll.burning.roll}}</i>
                                 Burning
                             </button>
                         </div>
                         <div class="eight wide column protection-dice">
-                            <button class="ui right labeled icon button"
+                            <button class="ui right labeled icon button" id="actor-freezing-protection-roll"
                                 style="color:rgb(100,255,255); text-shadow: 0 0 10px cyan">
-                                <i class="icon xdy">{{actor.protectiveDice.freezing}}</i>
+                                <i class="icon xdy">{{actor.roll.freezing.roll}}</i>
                                 Freezing
                             </button>
                         </div>
                         <div class="eight wide column protection-dice">
-                            <button class="ui right labeled icon button"
+                            <button class="ui right labeled icon button" id="actor-decay-protection-roll"
                                 style="color:rgb(100,255,100); text-shadow: 0 0 10px green">
-                                <i class="icon xdy">{{actor.protectiveDice.decay}}</i>
+                                <i class="icon xdy">{{actor.roll.decay.roll}}</i>
                                 Decay
                             </button>
                         </div>
                         <div class="eight wide column protection-dice">
-                            <button class="ui right labeled icon button"
+                            <button class="ui right labeled icon button" id="actor-mind-protection-roll"
                                 style="color:rgb(255,100,255); text-shadow: 0 0 10px magenta">
-                                <i class="icon xdy">{{actor.protectiveDice.mind}}</i>
+                                <i class="icon xdy">{{actor.roll.mind.roll}}</i>
                                 Mind
                             </button>
                         </div>
@@ -123,70 +130,79 @@
         </div>
     </header>
 
-    <div class="ui top attached tabular menu">
-        <a class="item" data-tab="actions">Actions</a>
-        <a class="item" data-tab="equipment">Equipment</a>
-        <a class="item" data-tab="inventory">Inventory</a>
-        <a class="item" data-tab="skills">Skills</a>
-        <a class="item" data-tab="preps">Preps</a>
-        <a class="item" data-tab="conditions">Conditions</a>
-    </div>
-    {{#if (eq actor.tab "action")}}
-    {{/if}}
-    <div class="ui bottom attached tab segment" data-tab="actions">
-        <h2>Actions</h2>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="equipment">
-        <h2>Equipment</h2>
-        <div class="ui grid">
-            <div class="eight wide column equipment-button ">
-                <div class="equipment-button-component">
-                    LEFT HAND
+    <nav class="tabs actor-tabs" data-group="actor-tabs">
+        <a class="item actor-tabs-item" data-tab="actions">Actions</a>
+        <a class="item actor-tabs-item" data-tab="equipment">Equipment</a>
+        <a class="item actor-tabs-item" data-tab="inventory">Inventory</a>
+        <a class="item actor-tabs-item" data-tab="skills">Skills</a>
+        <a class="item actor-tabs-item" data-tab="preps">Preps</a>
+        <a class="item actor-tabs-item" data-tab="conditions">Conditions</a>
+    </nav>
+
+    <section class="content actor-tabs-body">
+        <div class="tab" data-tab="actions" data-group="actor-tabs"> <h2 class="actor-tabs-body-header">Actions</h2> </div>
+        <div class="tab" data-tab="equipment" data-group="actor-tabs"> <h2 class="actor-tabs-body-header">Equipment</h2>
+            <div class="ui grid">
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        LEFT HAND
+                    </div>
                 </div>
-            </div>
-            <div class="eight wide column equipment-button ">
-                <div class="equipment-button-component">
-                    RIGHT HAND
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        RIGHT HAND
+                    </div>
                 </div>
-            </div>
-            <div class="eight wide column equipment-button ">
-                <div class="equipment-button-component">
-                    BODY
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        BODY
+                    </div>
                 </div>
-            </div>
-            <div class="eight wide column equipment-button ">
-                <div class="equipment-button-component">
-                    HEAD
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        HEAD
+                    </div>
                 </div>
-            </div>
-            <div class="eight wide column equipment-button ">
-                <div class="equipment-button-component">
-                    AUGMENTATION ARTIFACT
+                <div class="eight wide column equipment-button ">
+                    <div class="equipment-button-component">
+                        AUGMENTATION ARTIFACT
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="inventory">
-        <h2>Inventory</h2>
-        <div class="ui grid">
-            <div class="seven column row equipment-button">
-                <div class="column equipment-button-component">1</div>
-                <div class="column equipment-button-component">2</div>
-                <div class="column equipment-button-component">3</div>
-                <div class="column equipment-button-component">4</div>
-                <div class="column equipment-button-component">5</div>
-                <div class="column equipment-button-component">6</div>
-                <div class="column equipment-button-component">7</div>
+        <div class="tab" data-tab="inventory" data-group="actor-tabs">
+            <h2 class="actor-tabs-body-header">Inventory</h2>
+            <div class="inventory-grid">
+                {{#each systemData.backpack.items as |itemRow|}}
+                    <div class="inventory-row">
+                        {{#each itemRow}}
+                            <button class="inventory-button">{{@../index}}.{{@index}}</button>
+                        {{/each}}
+                    </div>
+                {{/each}}
             </div>
         </div>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="skills">
-        <h2>Skills</h2>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="preps">
-        <h2>Preps</h2>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="conditions">
-        <h2>Conditions</h2>
-    </div>
+        <div class="tab" data-tab="skills" data-group="actor-tabs">
+            <h2 class="actor-tabs-body-header">Skills</h2>
+            <input type="number">Skill points: {{systemData.skillpoints}}</input>
+            <div style="display:grid">
+                {{#each actor.system.skills as |skill|}}
+                    <div style="margin-top:5px; margin-bottom:5px; text-align: center">
+                        <button style="width:unset; min-width:250px; margin-right:20px;" id="actor-{{skill.name}}-roll">{{skill.name}}</button>
+                        <div class="ui icon buttons">
+                            <button class="ui button" style="width:25%" id="actor-{{skill.name}}-decrease"><i class="left arrow icon"></i></button>
+                            <button class="ui disabled button" style="width:50%">{{skill.attribute.roll}}</button>
+                            <button class="ui button" style="width:25%" id="actor-{{skill.name}}-increase"><i class="right arrow icon"></i></button>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="tab" data-tab="preps" data-group="actor-tabs">
+            <h2 class="actor-tabs-body-header">Preps</h2>
+        </div>
+        <div class="tab" data-tab="conditions" data-group="actor-tabs">
+            <h2 class="actor-tabs-body-header">Conditions</h2>
+        </div>
+    </section>
 </form>

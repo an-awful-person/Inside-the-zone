@@ -113,6 +113,18 @@ a:hover {
     z-index: 10;
 }
 
+.header-image-slow-pulse-animation {
+    animation-name: faint-pulse;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+.header-image-fast-pulse-animation {
+    animation-name: pulse;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
 h1 {
     color:var(--stalker-highlight);
     font-size:17px;
@@ -151,6 +163,18 @@ h2 {
     0%   {color: #76a313;}
     50%  {color: var(--stalker-highlight);}
     100% {color: #76a313;}
+}
+
+@keyframes pulse {
+    0% {opacity: 100%;}
+    50% {opacity: 0%;}
+    100% {opacity: 100%;}
+}
+
+@keyframes faint-pulse {
+    0% {opacity: 100%;}
+    50% {opacity: 50%;}
+    100% {opacity: 100%;}
 }
 
 .tabs .item.active {
@@ -247,3 +271,45 @@ input[type="checkbox"]{
     accent-color: var(--stalker-input-background);
 }
 
+.actor-tabs {
+    margin-top:20px;
+    margin-bottom:20px;
+    border-bottom: 1px solid;
+    box-shadow: 0 10px 10px -5px rgb(0 0 0 / 50%);
+}
+
+.actor-tabs-item {
+    margin-bottom:10px;
+}
+
+.actor-tabs-body {
+    margin:10px;
+}
+
+.actor-tabs-body-header {
+    text-align:center;
+}
+
+.inventory-row{
+    display:block;
+    text-align:center;
+    margin-bottom:4px;
+    margin-top:4px;
+}
+
+.inventory-grid{
+    margin:auto;
+}
+
+.inventory-button{
+    --inventory-button-size:50px;
+    color:rgba(255,255,255,0.3);
+    font-size:8px;
+    margin:5px;
+    width:var(--inventory-button-size);
+    height:var(--inventory-button-size);
+    max-width:var(--inventory-button-size);
+    max-height:var(--inventory-button-size);
+    min-height:var(--inventory-button-size);
+    min-width:var(--inventory-button-size);
+}

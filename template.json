@@ -18,6 +18,107 @@
                     "min":0,
                     "max":5
                 },
+                "skills":[
+                    {
+                        "name":"crafting",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"alertness",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"wilderness knowledge",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"anomaly knowledge",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"scientific knowledge",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"cooking",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"medicine",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"hunting",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"strength",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"agility",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    },
+                    {
+                        "name":"charismatic",
+                        "value":0,
+                        "min":0,
+                        "max":5,
+                        "boons":[],
+                        "banes":[],
+                        "addition":""
+                    }
+                ],
                 "preps":[],
                 "conditions":[],
                 "actions":[],
@@ -29,7 +130,8 @@
                     "rightHand":"",
                     "body":"",
                     "head":""
-                }
+                },
+                "money":0
             }
         },
         "soldier": {
