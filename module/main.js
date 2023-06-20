@@ -1,20 +1,25 @@
-import ITZItemSheet from "./sheets/ITZItemSheet.js";
-import ITZSoldierSheet from "./sheets/character sheets/ITZSoldierSheet.js";
+import ITZItemSheet from "./sheets/item sheets/ITZItemSheet.js";
+import ITZCoreCharacterSheet from "./sheets/character sheets/ITZCoreCharacterSheet.js";
+import ITZItemDirectory from "./directories/ITZItemDirectory.js";
+import ITZWeaponSheet from "./sheets/item sheets/ITZWeaponSheet.js";
 
 Hooks.once("init", async function(){
     console.log("Inside the zone | Initializing Inside the zone System");
     initFomanticUI();
     initSheets();
-    registerHandlebarsHelpers();  
+    registerHandlebarsHelpers(); 
+
+    CONFIG.ui.items = ITZItemDirectory;
 });
 
 function initSheets(){
     console.log("Inside the zone | Initializing Templates");
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("inside-the-zone", ITZItemSheet, { makeDefault : true}); 
+    Items.registerSheet("inside-the-zone", ITZItemSheet, { types: ['item'], makeDefault : true}); 
+    Items.registerSheet("inside-the-zone", ITZWeaponSheet, {types: ['weapon'], makeDefault : true}); 
 
     Actors.unregisterSheet("core",ActorSheet);
-    Actors.registerSheet("inside-the-zone",ITZSoldierSheet,{ makeDefault : true});
+    Actors.registerSheet("inside-the-zone",ITZCoreCharacterSheet,{ makeDefault : true});
 }
 
 function initFomanticUI() {

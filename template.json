@@ -1,6 +1,6 @@
 {
     "Actor":{
-        "types": ["soldier", "stalker", "scientist", "medium"],
+        "types": ["soldier", "stalker", "scientist", "medium", "storage", "NPC"],
         "templates":{
             "baseCharacter":{
                 "health":{
@@ -184,16 +184,27 @@
         }
     },
     "Item":{
-        "types": ["item"],
+        "types": ["item", "weapon", "armor", "artifact"],
         "templates":{
             "baseItem":{
                 "broken":false,
                 "width":1,
                 "height":1,
-                "description":""
+                "description":"",
+                "uses":-1
             }
         },
         "item": {
+            "templates":["baseItem"],
+            "description":"Base useable item. Used as medicine or as component of another item or for roleplay properties."
+        },
+        "weapon": {
+            "templates":["baseItem"]
+        },
+        "armor": {
+            "templates":["baseItem"]
+        },
+        "artifact": {
             "templates":["baseItem"]
         }
     }

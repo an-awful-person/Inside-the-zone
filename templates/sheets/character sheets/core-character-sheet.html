@@ -132,55 +132,76 @@
 
     <nav class="tabs actor-tabs" data-group="actor-tabs">
         <a class="item actor-tabs-item" data-tab="actions">Actions</a>
-        <a class="item actor-tabs-item" data-tab="equipment">Equipment</a>
         <a class="item actor-tabs-item" data-tab="inventory">Inventory</a>
         <a class="item actor-tabs-item" data-tab="skills">Skills</a>
         <a class="item actor-tabs-item" data-tab="preps">Preps</a>
         <a class="item actor-tabs-item" data-tab="conditions">Conditions</a>
     </nav>
 
-    <section class="content actor-tabs-body">
+    <div class="content actor-tabs-body">
         <div class="tab" data-tab="actions" data-group="actor-tabs"> <h2 class="actor-tabs-body-header">Actions</h2> </div>
-        <div class="tab" data-tab="equipment" data-group="actor-tabs"> <h2 class="actor-tabs-body-header">Equipment</h2>
-            <div class="ui grid">
-                <div class="eight wide column equipment-button ">
-                    <div class="equipment-button-component">
-                        LEFT HAND
-                    </div>
-                </div>
-                <div class="eight wide column equipment-button ">
-                    <div class="equipment-button-component">
-                        RIGHT HAND
-                    </div>
-                </div>
-                <div class="eight wide column equipment-button ">
-                    <div class="equipment-button-component">
-                        BODY
-                    </div>
-                </div>
-                <div class="eight wide column equipment-button ">
-                    <div class="equipment-button-component">
-                        HEAD
-                    </div>
-                </div>
-                <div class="eight wide column equipment-button ">
-                    <div class="equipment-button-component">
-                        AUGMENTATION ARTIFACT
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="tab" data-tab="inventory" data-group="actor-tabs">
-            <h2 class="actor-tabs-body-header">Inventory</h2>
-            <div class="inventory-grid">
-                {{#each systemData.backpack.items as |itemRow|}}
-                    <div class="inventory-row">
-                        {{#each itemRow}}
-                            <button class="inventory-button">{{@../index}}.{{@index}}</button>
+            <div class="ui grid">
+                <div class="nine wide column">
+                    <h2 class="actor-tabs-body-header">Inventory</h2>
+                    <div class="inventory-grid">
+                        {{#each systemData.backpack.items as |itemRow|}}
+                            <div class="inventory-row">
+                                {{#each itemRow as |item|}}
+                                    {{#if item.img}}
+                                        <img src="{{item.img}}" style="{{item.imgStyle}}" class="landing inventory item" data-document-id="{{item.contains}}"/>
+                                    {{/if}}
+                                    <button class="inventory-button landing inventory item" id="inventory-button_{{@../index}}-{{@index}}" data-document-id="{{item.contains}}" data-item-id="{{item.contains}}">
+                                    </button>
+                                {{/each}}
+                            </div>
                         {{/each}}
                     </div>
-                {{/each}}
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <button class="landing drop-item item">
+                                DROP
+                            </button>
+                        </div>
+                        <div class="eight wide column">
+                            <button class="landing delete-item item">
+                                DELETE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h2 class="actor-tabs-body-header">Equipment</h2>
+                    <div class="ui grid">
+                        <div class="eight wide column equipment-button ">
+                            <div class="equipment-button-component">
+                                LEFT HAND
+                            </div>
+                        </div>
+                        <div class="eight wide column equipment-button ">
+                            <div class="equipment-button-component">
+                                RIGHT HAND
+                            </div>
+                        </div>
+                        <div class="eight wide column equipment-button ">
+                            <div class="equipment-button-component">
+                                BODY
+                            </div>
+                        </div>
+                        <div class="eight wide column equipment-button ">
+                            <div class="equipment-button-component">
+                                HEAD
+                            </div>
+                        </div>
+                        <div class="eight wide column equipment-button ">
+                            <div class="equipment-button-component">
+                                AUGMENTATION ARTIFACT
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
         <div class="tab" data-tab="skills" data-group="actor-tabs">
             <h2 class="actor-tabs-body-header">Skills</h2>
@@ -204,5 +225,5 @@
         <div class="tab" data-tab="conditions" data-group="actor-tabs">
             <h2 class="actor-tabs-body-header">Conditions</h2>
         </div>
-    </section>
+    </div>
 </form>

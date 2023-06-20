@@ -15,6 +15,7 @@ body {
     --color-border-light-primary: #333;
     --color-border-light-secondary: #444;
     --color-border-light-tertiary: #555;
+    cursor: url('../../assets/img/ui_ani_cursor_01.png'), auto;
 }
 
 a {
@@ -125,6 +126,17 @@ a:hover {
     animation-iteration-count: infinite;
 }
 
+.directory .directory-item.document {
+    min-height: var(--sidebar-item-height);
+}
+
+.directory .directory-item img {
+    height:auto;
+    width:auto;
+    margin:auto;
+    max-width: var(--sidebar-item-height);
+}
+
 h1 {
     color:var(--stalker-highlight);
     font-size:17px;
@@ -159,24 +171,6 @@ h2 {
     height:100%;
 }
 
-@keyframes radioactive-glow {
-    0%   {color: #76a313;}
-    50%  {color: var(--stalker-highlight);}
-    100% {color: #76a313;}
-}
-
-@keyframes pulse {
-    0% {opacity: 100%;}
-    50% {opacity: 0%;}
-    100% {opacity: 100%;}
-}
-
-@keyframes faint-pulse {
-    0% {opacity: 100%;}
-    50% {opacity: 50%;}
-    100% {opacity: 100%;}
-}
-
 .tabs .item.active {
     animation-name: radioactive-glow;
     animation-duration: 1.5s;
@@ -202,8 +196,6 @@ button {
     color:white !important;
     text-shadow: 0 0 10px white !important;
     box-shadow: 0 0 5px var(--stalker-secondary);
-    /* background: url(../../assets/img/rust\ metal\ texture.jpg); */
-    /* background-color:#444; */
 }
 
 .ui[class*="right labeled"].icon.button{
@@ -292,9 +284,10 @@ input[type="checkbox"]{
 
 .inventory-row{
     display:block;
-    text-align:center;
+    /* text-align:center; */
     margin-bottom:4px;
     margin-top:4px;
+    position:relative;
 }
 
 .inventory-grid{
@@ -302,14 +295,78 @@ input[type="checkbox"]{
 }
 
 .inventory-button{
-    --inventory-button-size:50px;
+    --inventory-button-size:45px;
     color:rgba(255,255,255,0.3);
     font-size:8px;
-    margin:5px;
+    margin:0px;
     width:var(--inventory-button-size);
     height:var(--inventory-button-size);
     max-width:var(--inventory-button-size);
     max-height:var(--inventory-button-size);
     min-height:var(--inventory-button-size);
     min-width:var(--inventory-button-size);
+    position:relative;
+    z-index:5;
+    border: 2px solid rgba(0,0,0,0.2);
+}
+
+.optionalLanding{
+    animation-name: correctSlot;
+    animation-duration: 1s;
+}
+
+.wrongLanding{
+    animation-name: wrongSlot;
+    animation-duration: 1s;
+}
+
+.drop-item{
+    height:50px;
+    visibility: hidden;
+}
+
+.delete-item{
+    height:50px;
+    visibility: hidden;
+}
+
+/* ANIMATIONS */
+
+@keyframes pulse {
+    0% {opacity: 100%;}
+    50% {opacity: 0%;}
+    100% {opacity: 100%;}
+}
+
+@keyframes faint-pulse {
+    0% {opacity: 100%;}
+    50% {opacity: 50%;}
+    100% {opacity: 100%;}
+}
+
+@keyframes radioactive-glow {
+    0%   {color: #76a313;}
+    50%  {color: var(--stalker-highlight);}
+    100% {color: #76a313;}
+}
+
+@keyframes cursor{
+    12% {cursor: url('../../assets/img/ui_ani_cursor_01.png'), auto}
+    25% {cursor: url('../../assets/img/ui_ani_cursor_02.png'), auto}
+    37% {cursor: url('../../assets/img/ui_ani_cursor_03.png'), auto}
+    50% {cursor: url('../../assets/img/ui_ani_cursor_04.png'), auto}
+    62% {cursor: url('../../assets/img/ui_ani_cursor_05.png'), auto}
+    75% {cursor: url('../../assets/img/ui_ani_cursor_06.png'), auto}
+    87% {cursor: url('../../assets/img/ui_ani_cursor_07.png'), auto}
+    100% {cursor: url('../../assets/img/ui_ani_cursor_08.png'), auto}
+}
+
+@keyframes correctSlot{
+    0% {box-shadow: 0 0 5px rgba(255,255,255,1);}
+    100% {box-shadow: 0 0 5px rgba(255,255,255,0);}
+}
+
+@keyframes wrongSlot {
+    0% {box-shadow: 0 0 5px rgba(203, 104, 104,1);}
+    100% {box-shadow: 0 0 5px rgba(203, 104, 104,0);}
 }
