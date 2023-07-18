@@ -1,9 +1,8 @@
 {
     "compilerOptions": {
-        "target":"es5",
-        "module":"umd",
+        "target":"ES2022",
+        "module": "ES2022",
         "moduleResolution": "node",
-        "strictNullChecks": true,
-        "types":["@league-of-foundry-developers/foundry-vtt-types"]
+        "types":["@league-of-foundry-developers/foundry-vtt-types"],
     }
 }

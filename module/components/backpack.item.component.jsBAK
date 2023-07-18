@@ -3,7 +3,7 @@ export class BackpackItem {
     position = {
         x: 0,
         y: 0
-    };
+    }
     actorId;
     /**
      * @type {string}
@@ -13,7 +13,8 @@ export class BackpackItem {
     topLeftCorner = {
         x: 0,
         y: 0
-    };
+    }
+
     constructor(x, y, actorId, item) {
         this.actorId = actorId;
         this.position.x = x;
@@ -22,25 +23,36 @@ export class BackpackItem {
             this.contains = item;
         }
     }
+
     isEmpty() {
         return this.contains == '';
     }
+
     getItemId() {
         return this.isEmpty() ? 'empty' : this.contains;
     }
+
+    getOwner() {
+        return this._actor;
+    }
+
     getX() {
         return this.position.x;
     }
+
     getY() {
         return this.position.y;
     }
+
     setPositionX(x) {
         this.position.x = x;
     }
+
     setPositionY(y) {
         this.position.y = y;
     }
-    setItemId(id) {
+
+    setItemId(id){
         this.contains = id;
     }
 }

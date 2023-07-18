@@ -1,1 +1,116 @@
-weapon
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <div style="flex:0.5">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <table style="border:none; background:none; width:unset;">
+                    <tr>
+                        <td>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <div class="inventory-grid" style="position:relative">
+                                    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" style="{{item.system.imageStyle}}" class="landing inventory item" data-document-id="{{item.id}}"/>
+                                    {{#each item.system.grid as |itemRow|}}
+                                        <div class="inventory-row">
+                                            {{#each itemRow as |item|}}
+                                                <button data-edit="img" class="inventory-button landing inventory item" id="inventory-button_{{@../index}}-{{@index}}" data-document-id="{{item.contains}}" data-item-id="{{item.contains}}">
+                                                </button>
+                                            {{/each}}
+                                        </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="number" name="system.height" value="{{systemData.height}}" style="margin-left: 10px; width: 25px;"/>
+                            <label>Height</label>
+                        </td>
+                    </tr>
+                    <tr style="background:none">
+                        <td>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <input type="number" name="system.width" value="{{systemData.width}}" style="margin-left: 10px; width: 25px;"/>
+                                <label>Width</label>
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
+            <div style="display:flex">
+                <button>Ammo</button>
+                <button>Buy Ammo</button>
+                <button>Artifact slot</button>
+                <button>1 handed</button>
+                <button>broken</button>
+            </div>
+        </div>
+    </header>
+    <div class="ui grid">
+        <div class="eight wide column">
+            <div style="display:block">
+                <div style="display:flex">
+                    <input name="attack name" type="text" placeholder="..."/>
+                    <select name="range" id="setRange">
+                        <option value="melee"> melee </option>
+                        <option value="short"> short </option>
+                        <option value="medium"> medium </option>
+                        <option value="long"> long </option>
+                    </select>
+                    <input name="dice" type="text" placeholder="1d4"/>
+                    <button class="ui toggle button">
+                        <i class="icon">
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                            width="300.000000pt" height="300.000000pt" viewBox="0 0 300.000000 300.000000"
+                            preserveAspectRatio="xMidYMid meet" style="width:19px; height:19px;">
+                                <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
+                                fill="#86bb15" stroke="none">
+                                <path d="M715 2850 c-12 -4 -26 -14 -32 -21 -27 -34 -118 -376 -157 -594 -53
+                                -293 -59 -375 -63 -942 l-5 -532 26 -26 25 -25 236 0 236 0 25 25 26 26 -5
+                                542 c-4 419 -8 570 -21 667 -36 275 -81 492 -151 725 -45 150 -74 182 -140
+                                155z"/>
+                                <path d="M1456 2838 c-56 -52 -165 -493 -212 -858 -14 -108 -18 -243 -21 -677
+                                l-5 -542 26 -26 25 -25 230 0 c229 0 230 0 258 24 l28 24 3 349 c7 717 -34
+                                1098 -164 1553 -47 164 -69 200 -119 200 -13 0 -35 -10 -49 -22z"/>
+                                <path d="M2207 2838 c-57 -51 -163 -481 -213 -868 -13 -97 -18 -246 -21 -667
+                                l-5 -542 26 -26 25 -25 236 0 236 0 25 26 26 25 -5 537 c-5 559 -9 618 -58
+                                910 -38 229 -132 580 -167 621 -27 33 -74 37 -105 9z"/>
+                                <path d="M481 634 c-19 -24 -21 -40 -21 -173 0 -121 4 -153 19 -186 42 -91 97
+                                -115 263 -115 68 0 139 5 158 10 40 11 104 71 119 113 6 16 11 95 11 176 0
+                                135 -2 151 -21 175 l-20 26 -244 0 -244 0 -20 -26z"/>
+                                <path d="M1247 648 c-28 -22 -37 -66 -37 -181 1 -132 12 -189 47 -235 44 -59
+                                89 -72 243 -72 154 0 199 13 243 72 35 45 46 103 47 234 0 118 -11 168 -40
+                                184 -29 15 -482 13 -503 -2z"/>
+                                <path d="M1991 634 c-19 -24 -21 -40 -21 -175 0 -162 6 -188 53 -238 50 -53
+                                81 -61 227 -61 175 0 229 23 271 115 15 33 19 65 19 186 0 133 -2 149 -21 173
+                                l-20 26 -244 0 -244 0 -20 -26z"/>
+                                </g>
+                        </svg>
+                        </i>
+                    </button>
+                    <select name="damage type" id="setDamageType">
+                        <option value="physical"> physical </option>
+                        <option value="ballistic"> ballistic </option>
+                        <option value="freezing"> freezing </option>
+                        <option value="burning"> burning </option>
+                        <option value="decay"> decay </option>
+                        <option value="mind"> mind </option>
+                    </select>
+                    <button>add</button>
+                </div>
+                <button>melee weapon attack</button>
+                <button>short weapon attack</button>
+                <button>medium weapon attack</button>
+            </div>
+        </div>
+        <div class="eight wide column">
+            <div style="width:100%; height: 100%;">
+                <label>Description</label>
+                <textarea style="color:white;">...</textarea>
+            </div>
+        </div>
+    </div>
+</form>

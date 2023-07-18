@@ -8,6 +8,6 @@
   },
   "devDependencies": {
     "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.6"
   }
 }
