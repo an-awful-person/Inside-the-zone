@@ -1,14 +1,60 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}}" autocomplete="off" style="min-height: 200px">
     <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
-        <div>
-            <label>Width</label>
-            <input type="number" name="system.width" value="{{systemData.width}}"/>
+        <div style="flex:auto">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <table style="border:none; background:none; width:unset;">
+                    <tr>
+                        <td>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <div class="inventory-grid" style="position:relative">
+                                    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" style="{{item.system.imageStyle}}" class="landing inventory item" data-document-id="{{item.id}}"/>
+                                    {{#each item.system.grid as |itemRow|}}
+                                        <div class="inventory-row">
+                                            {{#each itemRow as |item|}}
+                                                <button data-edit="img" class="inventory-button landing inventory item" id="inventory-button_{{@../index}}-{{@index}}" data-document-id="{{item.contains}}" data-item-id="{{item.contains}}">
+                                                </button>
+                                            {{/each}}
+                                        </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="number" name="system.height" value="{{systemData.height}}" style="margin-left: 10px; width: 25px;"/>
+                            <label>Height</label>
+                        </td>
+                    </tr>
+                    <tr style="background:none">
+                        <td>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <input type="number" name="system.width" value="{{systemData.width}}" style="width: 25px;"/>
+                                <label>Width</label>
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div>
-            <label>Height</label>
-            <input type="number" name="system.height" value="{{systemData.height}}"/>
+        <div style="flex:auto">
+            <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
         </div>
     </header>
+
+    <nav class="tabs item-description-tabs" data-group="item-description-tabs">
+        <a class="item item-description-tabs-item" data-tab="display">Display</a>
+        <a class="item item-description-tabs-item" data-tab="edit">Edit</a>
+    </nav>
+
+    <div class="ui grid" style="margin:10px;">    
+        <div class="content item-description-tabs-body">
+            <div class="tab description-display" data-tab="display" data-group="item-description-tabs">{{item.system.description}}</div>
+            <div class="tab" data-tab="edit" data-group="item-description-tabs"> 
+                <h2 class="item-tabs-body-header">Edit</h2> 
+                <textarea class="description" rows="4">{{item.system.description}}</textarea>
+            </div>
+        </div>
+    </div>
 </form>
