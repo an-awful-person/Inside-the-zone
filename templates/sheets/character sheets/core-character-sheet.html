@@ -139,9 +139,14 @@
     </nav>
 
     <div class="content actor-tabs-body">
+
+        <!-- ACTIONS -->
         <div class="tab" data-tab="actions" data-group="actor-tabs"> <h2 class="actor-tabs-body-header">Actions</h2> </div>
+
+        <!-- INVENTORY & EQUIPMENT -->
         <div class="tab" data-tab="inventory" data-group="actor-tabs">
             <div class="ui grid">
+                <!-- INVENTORY -->
                 <div class="nine wide column">
                     <h2 class="actor-tabs-body-header">Inventory</h2>
                     <div class="inventory-grid">
@@ -155,6 +160,45 @@
                                     </button>
                                 {{/each}}
                             </div>
+                        {{/each}}
+                        <button class="add-extra-bag-button"><i class="plus icon"></i></button>
+                    </div>'
+                    <div class="ui grid" style="display:block">
+                        {{#each actor.system.extra_bags as |extra_bag|}}
+                            <table style="border:none; background:none; width:unset; margin:auto; position:relative">
+                                <tr>
+                                    <td>
+                                        <div class="extra-bag-grid extra-bag-index-{{@index}}">
+                                            {{#each extra_bag.items as |itemRow|}}
+                                                <div class="extra-bag-row">
+                                                    {{#each itemRow as |item|}}
+                                                        {{#if item.img}}
+                                                            <img src="{{item.img}}" style="{{item.imgStyle}}" class="landing extra-bag item extra-bag-index-{{@../../index}}" data-document-id="{{item.contains}}"/>
+                                                        {{/if}}
+                                                        <button class="extra-bag-button landing extra-bag item extra-bag-index-{{@../../index}}" id="extra-bag-button_{{@../index}}-{{@index}}" data-document-id="{{item.contains}}" data-item-id="{{item.contains}}">
+                                                        </button>
+                                                    {{/each}}
+                                                </div>
+                                            {{/each}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="number" class="extra-bag-height-{{@index}}" value="{{extra_bag.height}}" style="margin-left: 15px; width: 25px;"/>
+                                        <label>Height</label>
+                                    </td>
+                                </tr>
+                                <tr style="background:none">
+                                    <td>
+                                        <div style="display: flex; justify-content: center; align-items: center;">
+                                            <input type="number" class="extra-bag-width-{{@index}}" value="{{extra_bag.width}}" style="width: 25px;"/>
+                                            <label>Width</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="remove-extra-bag-button extra-bag-index-{{@index}}"><i class="trash icon"></i></button>
+                                    </td>
+                                </tr>
+                            </table>
                         {{/each}}
                     </div>
                     <div class="ui grid">
@@ -170,39 +214,62 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- EQUIPMENT -->
                 <div class="seven wide column">
                     <h2 class="actor-tabs-body-header">Equipment</h2>
-                    <div class="ui grid">
-                        <div class="eight wide column equipment-button ">
-                            <div class="equipment-button-component">
-                                LEFT HAND
+                    <div class="ui grid" style="margin-left:auto; margin-right:auto;">
+                        {{#if systemData.equipment.holding.enabled}}
+                        <div class="eight wide column equipment-button">
+                            <div class="equipment-button-component landing" id="equipment-holding" data-document-id="{{systemData.equipment.holding.item}}" style="background-image:url({{actor.system.equipment.holding.img}});">
+                                HOLDING
                             </div>
                         </div>
+                        {{/if}}
+                        {{#if systemData.equipment.body.enabled}}
                         <div class="eight wide column equipment-button ">
-                            <div class="equipment-button-component">
-                                RIGHT HAND
-                            </div>
-                        </div>
-                        <div class="eight wide column equipment-button ">
-                            <div class="equipment-button-component">
+                            <div class="equipment-button-component landing" id="equipment-body" data-document-id="{{systemData.equipment.body.item}}" style="background-image:url({{actor.system.equipment.body.img}});">
                                 BODY
                             </div>
                         </div>
+                        {{/if}}
+                        {{#if systemData.equipment.head.enabled}}
                         <div class="eight wide column equipment-button ">
-                            <div class="equipment-button-component">
+                            <div class="equipment-button-component landing" id="equipment-head" data-document-id="{{systemData.equipment.head.item}}" style="background-image:url({{actor.system.equipment.head.img}});">
                                 HEAD
                             </div>
                         </div>
+                        {{/if}}
+                        {{#if systemData.equipment.augmentation_artifact.enabled}}
                         <div class="eight wide column equipment-button ">
-                            <div class="equipment-button-component">
+                            <div class="equipment-button-component landing" id="equipment-augmentation-artifact" data-document-id="{{systemData.equipment.augmentation_artifact.item}}" style="background-image:url({{actor.system.equipment.augmentation_artifact.img}});">
                                 AUGMENTATION ARTIFACT
                             </div>
                         </div>
+                        {{/if}}
+                        {{#if systemData.equipment.protection_artifact.enabled}}
+                        <div class="eight wide column equipment-button ">
+                            <div class="equipment-button-component landing" id="equipment-protection-artifact" data-document-id="{{systemData.equipment.protection_artifact.item}}" style="background-image:url({{actor.system.equipment.protection_artifact.img}});">
+                                PROTECTION ARTIFACT
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{#each systemData.equipment.powerword_artifacts as |powerword_artifact|}}
+                            {{#if powerword_artifact.enabled}}
+                            <div class="eight wide column equipment-button ">
+                                <div class="equipment-button-component landing" id="equipment-powerword-artifact-{{@index}}" data-document-id="{{systemData.equipment.powerword_artifacts.[@index].item}}" style="background-image:url({{actor.system.equipment.powerword_artifacts.[@index].img}});">
+                                    POWERWORD ARTIFACT
+                                </div>
+                            </div>
+                            {{/if}}
+                        {{/each}}
                     </div>
                 </div>
             </div>
 
         </div>
+
+        <!-- SKILLS -->
         <div class="tab" data-tab="skills" data-group="actor-tabs">
             <h2 class="actor-tabs-body-header">Skills</h2>
             <input type="number">Skill points: {{systemData.skillpoints}}</input>
@@ -219,11 +286,40 @@
                 {{/each}}
             </div>
         </div>
+
+        <!-- PREPS -->
         <div class="tab" data-tab="preps" data-group="actor-tabs">
             <h2 class="actor-tabs-body-header">Preps</h2>
+            <div class="ui grid" style="display:block">
+                {{#each actor.system.preps as |prep|}}
+                <div class="landing prep-drop" data-document-id="{{prep.itemId}}" id="prep {{@index}}">
+                    {{#if prep.itemId}}
+                        <img src="{{prep.img}}" style="width:40px; height:40px; margin-right:20px;"/>
+                        <button id="prep {{@index}}" class="prep-button">{{prep.name}}</button>
+                        <button class="delete-prep" style="width:40px; height:40px; margin-left:10px;"><i class="trash icon" style="margin:0"></i></button>
+                    {{else}}
+                        <img style="width:40px; height:40px; margin-right:20px;"/>
+                        <button class="prep-button" id="prep {{@index}}"></button>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
         </div>
+        <!-- CONDITIONS -->
         <div class="tab" data-tab="conditions" data-group="actor-tabs">
             <h2 class="actor-tabs-body-header">Conditions</h2>
+            <div style="display:block">
+                <div class="landing condition-drop">Drop conditions here <i class="caret down icon" style="margin:0"></i></div>
+                {{#if actor.system.conditions.length}}
+                    {{#each actor.system.conditions as |condition|}}
+                    <div class="condition-item" style="display:flex; margin-top:2px; margin-bottom:2px;" data-document-id="{{condition.itemId}}">
+                        <img src="{{condition.img}}" style="width:30px; height:30px; margin-right:20px;"/>
+                        <button class="condition-button">{{condition.name}}</button>
+                        <button class="delete-condition" style="width:30px; height:30px; margin-left:10px;"><i class="trash icon" style="margin:0"></i></button>
+                    </div>
+                    {{/each}}
+                {{/if}}
+            </div>
         </div>
     </div>
 </form>

@@ -119,18 +119,34 @@
                         "addition":""
                     }
                 ],
-                "preps":[],
+                "preps":[
+                    {
+                        "itemId":"",
+                        "img":"",
+                        "name":""
+                    },
+                    {
+                        "itemId":"",
+                        "img":"",
+                        "name":""
+                    },
+                    {
+                        "itemId":"",
+                        "img":"",
+                        "name":""
+                    },
+                    {
+                        "itemId":"",
+                        "img":"",
+                        "name":""
+                    }
+                ],
+                "extra_bags":[],
                 "conditions":[],
                 "actions":[],
                 "reactions":[],
                 "movement":20,
                 "skillpoints":0,
-                "equipment":{
-                    "leftHand":"",
-                    "rightHand":"",
-                    "body":"",
-                    "head":""
-                },
                 "money":0
             }
         },
@@ -144,10 +160,32 @@
             "reactions":[
                 "suppressive fire"
             ],
-            "conditions":[
+            "abilities":[
                 "friend or foe"
             ],
-            "skillpoints":5
+            "skillpoints":5,
+            "equipment":{
+                "holding":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "body":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "head":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "augmentation_artifact":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                }
+            }
         },
         "stalker": {
             "templates":["baseCharacter"],
@@ -158,7 +196,29 @@
             },
             "skillpoints":7,
             "reaction":["fatal mistake"],
-            "conditions":["clueless"]
+            "abilities":["clueless"],
+            "equipment":{
+                "holding":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "body":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "head":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "protection_artifact":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                }
+            }
         },
         "scientist": {
             "templates":["baseCharacter"],
@@ -169,7 +229,26 @@
             },
             "skillpoints":10,
             "reaction":["flash of mind"],
-            "conditions":["inconceivable"]
+            "abilities":["inconceivable"],
+            "equipment":{
+                "holding":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "body":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "head":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "powerword_artifacts":[
+                ]
+            }
         },
         "medium": {
             "templates":["baseCharacter"],
@@ -180,31 +259,57 @@
             },
             "skillpoints":5,
             "reaction":["psy support"],
-            "conditions":["unstable mind"]
+            "abilities":["unstable mind"],
+            "equipment":{
+                "holding":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "body":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "head":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "powerword_artifacts":[
+                ],
+                "protection_artifact":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "augmentation_artifact":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                }
+            }
         }
     },
     "Item":{
-        "types": ["item", "weapon", "armor", "artifact"],
+        "types": ["item", "prep", "condition"],
         "templates":{
             "baseItem":{
-                "broken":false,
-                "width":1,
-                "height":1,
-                "description":"",
-                "uses":-1
+                "description":"Base useable item. Used as medicine or as component of another item or for roleplay properties."
             }
         },
         "item": {
             "templates":["baseItem"],
-            "description":"Base useable item. Used as medicine or as component of another item or for roleplay properties."
+            "broken":false,
+            "width":1,
+            "height":1,
+            "uses":-1
         },
-        "weapon": {
-            "templates":["baseItem"]
+        "prep":{
+            "templates":["baseItem"],
+            "requirement":"none"
         },
-        "armor": {
-            "templates":["baseItem"]
-        },
-        "artifact": {
+        "condition":{
             "templates":["baseItem"]
         }
     }

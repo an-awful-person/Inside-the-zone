@@ -169,6 +169,35 @@ h2 {
     display: flex;
     width:100%;
     height:100%;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.prep-drop{
+    display:flex;
+    margin:20px;
+}
+
+.prep-button{
+    height:40px;
+}
+
+.condition-drop{
+    height:40px;
+    width:100%;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    line-height: normal;
+}
+
+.condition-button{
+    height:30px;
 }
 
 .tabs .item.active {
@@ -290,8 +319,22 @@ input[type="checkbox"]{
     position:relative;
 }
 
+.extra-bag-row{
+    display:block;
+    /* text-align:center; */
+    margin-bottom:4px;
+    margin-top:4px;
+    position:relative;
+}
+
 .inventory-grid{
     margin:auto;
+    position:relative;
+}
+
+.extra-bag-grid{
+    margin:auto;
+    position:relative;
 }
 
 .inventory-button{
@@ -308,6 +351,42 @@ input[type="checkbox"]{
     position:relative;
     z-index:5;
     border: 2px solid rgba(0,0,0,0.2);
+}
+
+.extra-bag-button{
+    --inventory-button-size:45px;
+    color:rgba(255,255,255,0.3);
+    font-size:8px;
+    margin:0px;
+    width:var(--inventory-button-size);
+    height:var(--inventory-button-size);
+    max-width:var(--inventory-button-size);
+    max-height:var(--inventory-button-size);
+    min-height:var(--inventory-button-size);
+    min-width:var(--inventory-button-size);
+    position:relative;
+    z-index:5;
+    border: 2px solid rgba(0,0,0,0.2);
+}
+
+.add-extra-bag-button{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    position: absolute;
+    z-index: 5;
+    right: -10px;
+    bottom: -10px;
+}
+
+.remove-extra-bag-button{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 25px;
+    right: 70px;
+    z-index: 5;
 }
 
 .optionalLanding{
@@ -328,6 +407,24 @@ input[type="checkbox"]{
 .delete-item{
     height:50px;
     visibility: hidden;
+}
+
+.item-description-tabs-body{
+    width:100%;
+    height:100%;
+    margin: 0 1rem;
+    background-color: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.item-description-tabs-item{
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.item-description-tabs-item.active{
+    background-color: rgba(0,0,0,0.2);
 }
 
 /* ANIMATIONS */
