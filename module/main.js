@@ -1,7 +1,8 @@
 import ITZItemSheet from "./sheets/item_sheets/ITZItemSheet.js";
 import ITZCoreCharacterSheet  from "./sheets/character_sheets/ITZCoreCharacterSheet.js";
 import ITZItemDirectory from "./directories/ITZItemDirectory.js";
-import ITZWeaponSheet from "./sheets/item_sheets/ITZWeaponSheet.js";
+import ITZPrepSheet from "./sheets/item_sheets/ITZPrepSheet.js";
+import ITZConditionSheet from "./sheets/item_sheets/ITZConditionSheet.js";
 
 Hooks.once("init", async function(){
     console.log("Inside the zone | Initializing Inside the zone System");
@@ -16,7 +17,8 @@ function initSheets(){
     console.log("Inside the zone | Initializing Templates");
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("inside-the-zone", ITZItemSheet, { types: ['item'], makeDefault : true}); 
-    Items.registerSheet("inside-the-zone", ITZWeaponSheet, {types: ['weapon'], makeDefault : true}); 
+    Items.registerSheet("inside-the-zone", ITZPrepSheet, { types: ['prep']}); 
+    Items.registerSheet("inside-the-zone", ITZConditionSheet, { types: ['condition']}); 
 
     Actors.unregisterSheet("core",ActorSheet);
     Actors.registerSheet("inside-the-zone",ITZCoreCharacterSheet,{ makeDefault : true});
@@ -50,10 +52,4 @@ function initFomanticUI() {
     const markdown = document.createElement("script");
     markdown.src = "../systems/inside-the-zone/node_modules/marked/marked.min.js";
     HEAD.appendChild(markdown);
-}
-
-function registerHandlebarsHelpers() {
-    Handlebars.registerHelper("tab", function(value, list) {
-        return list[value];
-    })
 }

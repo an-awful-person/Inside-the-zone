@@ -44,16 +44,17 @@
     </header>
 
     <nav class="tabs item-description-tabs" data-group="item-description-tabs">
-        <a class="item item-description-tabs-item" data-tab="display">Display</a>
-        <a class="item item-description-tabs-item" data-tab="edit">Edit</a>
+        <div style="margin-left:auto; margin-right:30px; margin-bottom: -2px;">
+            <a class="item item-description-tabs-item" data-tab="display"><i class="clipboard icon" style="margin-right: -1px"></i></a>
+            <a class="item item-description-tabs-item" data-tab="edit"><i class="edit icon" style="margin-right: -2px"></i></a>
+        </div>
     </nav>
 
     <div class="ui grid" style="margin:10px;">    
         <div class="content item-description-tabs-body">
             <div class="tab description-display" data-tab="display" data-group="item-description-tabs">{{item.system.description}}</div>
             <div class="tab" data-tab="edit" data-group="item-description-tabs"> 
-                <h2 class="item-tabs-body-header">Edit</h2> 
-                <textarea class="description" rows="4">{{item.system.description}}</textarea>
+                <textarea class="description" rows="4" style="color: var(--color-text-dark-primary); border-color: var(--color-text-dark-primary);">{{item.system.description}}</textarea>
             </div>
         </div>
     </div>
