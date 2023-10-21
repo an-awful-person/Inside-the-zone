@@ -1,5 +1,6 @@
 import { STATS } from "../../constants.js";
 import { Attribute } from "../attribute.component.js";
+import { rollDice } from "../dice.roll.function.js";
 
 export function attributeActiveListener(html, sheet) {
     /**
@@ -75,11 +76,10 @@ function _changeImageClass(stat) {
  * @private
  */
 function _rollSanity(sheet) {
-    sheet.actor.roll.sanity.rollTheDice().then(result => {
-        if (result.total < 4) {
+    const roll = rollDice(sheet.actor.roll.sanity.roll)
+    if (roll.result < 4) {
             _decreaseStat(STATS.SANITY, sheet);
-        }
-    })
+    }
 }
 
 /**

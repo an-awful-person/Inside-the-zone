@@ -213,18 +213,21 @@ async function _onDropItem(event, data, sheet) {
                         //cant equip animation
                     }
                     break;
+                case "equipment-powerword-artifact-1":
+                    if (equipment.powerword_artifacts_1.item == "") {
+                        _putItemInEquipment(itemData, 'powerword_artifacts_1', sameItemId, sheet);
+                    } else {
+                        //cant equip animation
+                    }
+                    break;
+                case "equipment-powerword-artifact-2":
+                    if (equipment.powerword_artifacts_2.item == "") {
+                        _putItemInEquipment(itemData, 'powerword_artifacts_2', sameItemId, sheet);
+                    } else {
+                        //cant equip animation
+                    }
+                    break;                    
             }
-
-            if (element.id.includes("equipment-powerword-artifact-")) {
-                const splitId = element.id.split('-');
-                const arrayNumber = parseInt(splitId[splitId.length - 1]);
-                if (equipment.powerword_artifacts[arrayNumber].item == "") {
-                    _putItemInEquipment(itemData, `powerword_artifacts.${arrayNumber}`, sameItemId, sheet);
-                } else {
-                    //cant equip animation
-                }
-            }
-
 
         }
 

@@ -107,13 +107,6 @@ a:hover {
     z-index:9;
 }
 
-.sheet header.sheet-header img.avatar-image-overlay {
-    width:200px;
-    height:200px;
-    position:absolute;
-    z-index: 10;
-}
-
 .header-image-slow-pulse-animation {
     animation-name: faint-pulse;
     animation-duration: 3s;
@@ -148,6 +141,13 @@ h2 {
     border-bottom:unset;
 }
 
+.hidden-table{
+    background: none;
+    border-spacing: 0px;
+    border-collapse: unset;
+    border-color: rgba(0,0,0,0);
+}
+
 .ui.grid>[class*="eight wide"].column.equipment-button {
     aspect-ratio: 1/1;
     display: flex;
@@ -157,7 +157,14 @@ h2 {
     line-height: normal;
 }
 
+.equipment-button{
+    width:50px;
+    height:50px;
+    margin:20px;
+}
+
 .equipment-button-component{
+    font-size:10px;
     color:rgba(255,255,255,0.3);
     justify-content: center;
     align-items: center;
@@ -165,13 +172,29 @@ h2 {
     line-height: normal;
     box-shadow: 0px 0px 10px black;
     background-color: var(--stalker-input-background);
-    border-radius:10px;
+    border-radius:2px;
     display: flex;
     width:100%;
     height:100%;
-    background-size: auto;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.skill-button-pack{
+    margin: 5px; text-align: center; display:flex;
+}
+
+.skill-left-button{
+    width:2rem; border-radius: 5px 0 0 5px; margin-right: -2px;
+}
+
+.skill-middle-button{
+    width:100%; min-width:150px;
+}
+
+.skill-right-button{
+    width:2rem; border-radius: 0 5px 5px 0; margin-left: -2px;
 }
 
 .prep-drop{
@@ -466,4 +489,9 @@ input[type="checkbox"]{
 @keyframes wrongSlot {
     0% {box-shadow: 0 0 5px rgba(203, 104, 104,1);}
     100% {box-shadow: 0 0 5px rgba(203, 104, 104,0);}
+}
+
+@font-face {
+    font-family:"pixelmix";
+    src: url('../../assets/pixelmix.ttf') format("opentype")
 }

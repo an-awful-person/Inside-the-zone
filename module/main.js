@@ -8,7 +8,6 @@ Hooks.once("init", async function(){
     console.log("Inside the zone | Initializing Inside the zone System");
     initFomanticUI();
     initSheets();
-    registerHandlebarsHelpers(); 
 
     CONFIG.ui.items = ITZItemDirectory;
 });

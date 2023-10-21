@@ -1,5 +1,6 @@
 import { Attribute } from "../attribute.component.js";
 import { DICE_ARRAY } from "../../constants.js";
+import { rollDice } from "../dice.roll.function.js";
 
 export function skillActivateListeners(html, sheet) {
     /**
@@ -10,7 +11,7 @@ export function skillActivateListeners(html, sheet) {
             html.find(`#actor-${skill.name}-increase`).click(() => _increaseSkill(skill.name, sheet));
             html.find(`#actor-${skill.name}-decrease`).click(() => _decreaseSkill(skill.name, sheet));
             html.find(`#actor-${skill.name}-roll`).click(() => {
-                sheet.actor.system.skills[sheet.actor.system.skills.indexOf(skill)].attribute.rollTheDice()
+               rollDice(sheet.actor.system.skills[sheet.actor.system.skills.indexOf(skill)].attribute.roll)
             });
         })
     }
@@ -18,12 +19,13 @@ export function skillActivateListeners(html, sheet) {
 
 /**
  * give skills their initial value
- * @param {Actor} actor
+ * @param {ActorSheet} sheet
  */
-export function initSkills(actor) {
-    actor.system.skills.forEach(skill => {
+export function initSkills(sheet) {
+    sheet.actor.system.skills.forEach(skill => {
         skill.attribute = new Attribute(DICE_ARRAY[skill.value]);
     })
+    sheet.render(false);
 }
 
 /**

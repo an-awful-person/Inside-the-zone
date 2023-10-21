@@ -1,28 +1,137 @@
 <form class="actor-sheet {{cssClass}}" autocomplete="off">
     <header class="sheet-header" style="align-items:normal; min-height:260px">
-        <div class="header-image-collection">
-            <img src="{{actor.img}}" title="{{actor.name}}" class="avatar-image" />
-            <img src="{{systemData.avatarBorder}}" class="avatar-image-overlay" />
-            <img src="{{systemData.stressImage}}" class="avatar-image-overlay" style="z-index:12" />
-            <img src="{{systemData.sanityBackground}}" class="avatar-image-overlay" style="z-index:13" />
-            <img src="{{systemData.sanityImage}}" class="avatar-image-overlay {{actor.image_class.sanity}}" style="z-index:14" />
-            <img src="{{systemData.healthImage}}" class="avatar-image-overlay {{actor.image_class.health}}" style="z-index:15" />
-            <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" class="avatar-image-overlay" style="z-index:500; opacity: 0;"/>
-        </div>
-        <div class="content" style="margin-right:20px">
-            <div class="ui grid">
-                <div class="ten wide column">
-                    <h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'Name' }}"
-                            style="color:white"/></h1>
-                    <div class="ui grid">
-                        <div class="four wide column">
+        <div style="position:relative; display:flex;">
+            <!-- HEALTH, EQUIPMENT -->
+            <div style="display:flex">
+                <table class="hidden-table">
+                    <tr>
+                        <th>
+                            <div style="display:block">
+                                {{#if systemData.equipment.head.enabled}}
+                                <div class="equipment-button">
+                                    <div class="equipment-button-component landing" id="equipment-head" data-document-id="{{systemData.equipment.head.item}}" style="background-image:url({{actor.system.equipment.head.img}});">
+                                        HEAD
+                                    </div>
+                                </div>
+                                {{/if}}
+                                {{#if systemData.equipment.holding.enabled}}
+                                <div class="eight wide column equipment-button">
+                                    <div class="equipment-button-component landing" id="equipment-holding" data-document-id="{{systemData.equipment.holding.item}}" style="background-image:url({{actor.system.equipment.holding.img}});">
+                                        HOLDING
+                                    </div>
+                                </div>
+                                {{/if}}
+                                {{#if systemData.equipment.body.enabled}}
+                                <div class="eight wide column equipment-button ">
+                                    <div class="equipment-button-component landing" id="equipment-body" data-document-id="{{systemData.equipment.body.item}}" style="background-image:url({{actor.system.equipment.body.img}});">
+                                        BODY
+                                    </div>
+                                </div>
+                                {{/if}}
+                            </div>
+                        </th>
+                        <th>
+                            <div style="position:relative">
+                                <img src="./systems/inside-the-zone/assets/img/health_empty.png" style="height:auto;">
+                                <img src="./systems/inside-the-zone/assets/img/health_full.png" style="position:absolute; left:0; clip-path: inset(75% 0 0 0); height: auto;">
+                            </div>
+                        </th>
+                        <th>
+                            <div style="display:block">
+                                {{#if systemData.equipment.augmentation_artifact.enabled}}
+                                <div class="eight wide column equipment-button ">
+                                    <div class="equipment-button-component landing" id="equipment-augmentation-artifact" data-document-id="{{systemData.equipment.augmentation_artifact.item}}" style="background-image:url({{actor.system.equipment.augmentation_artifact.img}});">
+                                        AUGMENTATION ARTIFACT
+                                    </div>
+                                </div>
+                                {{/if}}
+                                {{#if systemData.equipment.protection_artifact.enabled}}
+                                <div class="eight wide column equipment-button ">
+                                    <div class="equipment-button-component landing" id="equipment-protection-artifact" data-document-id="{{systemData.equipment.protection_artifact.item}}" style="background-image:url({{actor.system.equipment.protection_artifact.img}});">
+                                        PROTECTION ARTIFACT
+                                    </div>
+                                </div>
+                                {{/if}}
+                                {{#if systemData.equipment.powerword_artifacts_1.enabled}}
+                                <div class="eight wide column equipment-button ">
+                                    <div class="equipment-button-component landing" id="equipment-powerword-artifact-1" data-document-id="{{systemData.equipment.powerword_artifacts_1.item}}" style="background-image:url({{actor.system.equipment.powerword_artifacts_1.img}});">
+                                        POWERWORD ARTIFACT
+                                    </div>
+                                </div>
+                                {{/if}}
+                                {{#if systemData.equipment.powerword_artifacts_2.enabled}}
+                                <div class="eight wide column equipment-button ">
+                                    <div class="equipment-button-component landing" id="equipment-powerword-artifact-2" data-document-id="{{systemData.equipment.powerword_artifacts_2.item}}" style="background-image:url({{actor.system.equipment.powerword_artifacts_2.img}});">
+                                        POWERWORD ARTIFACT
+                                    </div>
+                                </div>
+                                {{/if}}
+
+
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                
+            </div>
+
+            <!-- NAME, CLASS, MONEY -->
+            <div style="display:block">
+                <div style="display:flex">
+                    <div style="display:block; margin:0.5em;">
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'Name' }}"
+                        style="color:white"/>
+                        <div style="display:flex; margin:0.5em">
                             <p style="color:#86bb15; margin: 0px 10px 0px 10px">Soldier</p>
-                        </div>
-                        <div class="twelve wide column">
-                            <input name="money" type="number" value="{{actor.system.money}}" placeholder="{{actor.system.money}}" style="width:80%"/> RU
+                            <div style="background: rgba(0,0,0,0.3); border-radius: 5px; border: solid 1px rgba(0,0,0,0.3);">
+                                <input name="money" type="number" value="{{actor.system.money}}" placeholder="{{actor.system.money}}" style="width:80%"/> RU
+                            </div>
                         </div>
                     </div>
+                    <div style="margin:0.5em; ">
+                        <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+                    </div>
                 </div>
+                <!-- PROTECTION DICE -->
+                <div style="display:flex; margin:5px;">
+                    <button id="actor-physical-protection-roll" style="color:rgb(100,100,255); text-shadow: 0 0 10px blue">
+                        Physical : {{actor.roll.physical.roll}}
+                    </button>
+                </div>
+
+                <div style="display:flex; margin:5px;">
+                    <button id="actor-physical-ballistic-roll" style="color:rgb(255,255,100); text-shadow: 0 0 10px yellow">
+                        Ballistic : {{actor.roll.ballistic.roll}}
+                    </button>
+                </div>
+
+                <div style="display:flex; margin:5px;">
+                    <button id="actor-physical-burning-roll" style="color:rgb(255,100,100); text-shadow: 0 0 10px red">
+                        Burning : {{actor.roll.burning.roll}}
+                    </button>
+                </div>
+
+                <div style="display:flex; margin:5px;" class="protection-dice">
+                    <button id="actor-physical-freezing-roll" style="color:rgb(100,255,255); text-shadow: 0 0 10px cyan">
+                        Freezing : {{actor.roll.freezing.roll}}
+                    </button>
+                </div>
+
+                <div style="display:flex; margin:5px;">
+                    <button id="actor-physical-decay-roll" style="color:rgb(100,255,100); text-shadow: 0 0 10px green">
+                        Decay : {{actor.roll.decay.roll}}
+                    </button>
+                </div>
+
+                <div style="display:flex; margin:5px;">
+                    <button id="actor-sanity-roll" style="color:rgb(255,100,255); text-shadow: 0 0 10px magenta">
+                        Sanity : {{actor.roll.sanity.roll}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="content" style="margin-right:20px">
+            <div class="ui grid">
                 <div class="six wide column">
                     <button id="actor-sanity-roll">sanity roll</button>
                 </div>
@@ -127,28 +236,150 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
     </header>
 
-    <nav class="tabs actor-tabs" data-group="actor-tabs">
-        <a class="item actor-tabs-item" data-tab="actions">Actions</a>
-        <a class="item actor-tabs-item" data-tab="inventory">Inventory</a>
-        <a class="item actor-tabs-item" data-tab="skills">Skills</a>
-        <a class="item actor-tabs-item" data-tab="preps">Preps</a>
-        <a class="item actor-tabs-item" data-tab="conditions">Conditions</a>
-    </nav>
+    <div class="accordion">
+        <!-- SKILLS -->
+        <div class="title">
+            <h2 class="actor-tabs-body-header">Skills</h2>
+        </div>
+        <div class="content" style="text-align:center">
+            Skill points: {{actor.system.skillpoints}}
+            <div style="display:flex; justify-content: center;">
+                <div style="display:block">
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.0.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.0.name}}-roll">{{actor.system.skills.0.name}} : {{actor.system.skills.0.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.0.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
 
-    <div class="content actor-tabs-body">
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.1.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.1.name}}-roll">{{actor.system.skills.1.name}} : {{actor.system.skills.1.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.1.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
 
-        <!-- ACTIONS -->
-        <div class="tab" data-tab="actions" data-group="actor-tabs"> <h2 class="actor-tabs-body-header">Actions</h2> </div>
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.2.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.2.name}}-roll">{{actor.system.skills.2.name}} : {{actor.system.skills.2.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.2.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
 
-        <!-- INVENTORY & EQUIPMENT -->
-        <div class="tab" data-tab="inventory" data-group="actor-tabs">
-            <div class="ui grid">
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.3.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.3.name}}-roll">{{actor.system.skills.3.name}} : {{actor.system.skills.3.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.3.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
+                </div>
+
+                <div style="display:block">
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.4.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.4.name}}-roll">{{actor.system.skills.4.name}} : {{actor.system.skills.4.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.4.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
+
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.5.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.5.name}}-roll">{{actor.system.skills.5.name}} : {{actor.system.skills.5.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.5.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
+
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.6.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.6.name}}-roll">{{actor.system.skills.6.name}} : {{actor.system.skills.6.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.6.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
+
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.7.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.7.name}}-roll">{{actor.system.skills.7.name}} : {{actor.system.skills.7.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.7.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
+                </div>
+
+                <div style="display:block">
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.8.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.8.name}}-roll">{{actor.system.skills.8.name}} : {{actor.system.skills.8.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.8.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
+
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.9.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.9.name}}-roll">{{actor.system.skills.9.name}} : {{actor.system.skills.9.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.9.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
+
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.10.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.10.name}}-roll">{{actor.system.skills.10.name}} : {{actor.system.skills.10.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.10.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
+
+                    <div class="skill-button-pack">
+                        <button id="actor-{{actor.system.skills.11.name}}-decrease" class="skill-left-button"><i class="left arrow icon"></i></button>
+                        <button class="skill-middle-button" id="actor-{{actor.system.skills.11.name}}-roll">{{actor.system.skills.11.name}} : {{actor.system.skills.11.attribute.roll}}</button>
+                        <button id="actor-{{actor.system.skills.11.name}}-increase" class="skill-right-button"><i class="right arrow icon"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PREPS, CONDITIONS, MAYBE ACTIONS -->
+        <div class="title">
+            <h2 class="actor-tabs-body-header">Preps, conditions</h2>
+        </div>
+        <div class="content">
+            <div style="display:flex">
+                <!-- PREPS -->
+                <div style="width:100%;">
+                    <h2 class="actor-tabs-body-header">Preps</h2>
+                    <div class="ui grid" style="display:block">
+                        {{#each actor.system.preps as |prep|}}
+                        <div class="landing prep-drop" data-document-id="{{prep.itemId}}" id="prep {{@index}}">
+                            {{#if prep.itemId}}
+                                <img src="{{prep.img}}" style="width:40px; height:40px; margin-right:20px;"/>
+                                <button id="prep {{@index}}" class="prep-button">{{prep.name}}</button>
+                                <button class="delete-prep" style="width:40px; height:40px; margin-left:10px;"><i class="trash icon" style="margin:0"></i></button>
+                            {{else}}
+                                <img style="width:40px; height:40px; margin-right:20px;"/>
+                                <button class="prep-button" id="prep {{@index}}"></button>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                
+                <!-- CONDITIONS -->
+                <div style="width:100%;">
+                    <h2 class="actor-tabs-body-header">Conditions</h2>
+                    <div style="display:block">
+                        <div class="landing condition-drop">Drop conditions here <i class="caret down icon" style="margin:0"></i></div>
+                        {{#if actor.system.conditions.length}}
+                            {{#each actor.system.conditions as |condition|}}
+                            <div class="condition-item" style="display:flex; margin-top:2px; margin-bottom:2px;" data-document-id="{{condition.itemId}}">
+                                <img src="{{condition.img}}" style="width:30px; height:30px; margin-right:20px;"/>
+                                <button class="condition-button">{{condition.name}}</button>
+                                <button class="delete-condition" style="width:30px; height:30px; margin-left:10px;"><i class="trash icon" style="margin:0"></i></button>
+                            </div>
+                            {{/each}}
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INVENTORY -->
+        <div class="title">
+            <h2 class="actor-tabs-body-header">Inventory</h2>
+        </div>
+        <div class="content">
+            <div style="display:flex">
                 <!-- INVENTORY -->
-                <div class="nine wide column">
-                    <h2 class="actor-tabs-body-header">Inventory</h2>
+                <div style="margin: 1rem auto;">
+                    
                     <div class="inventory-grid">
                         {{#each systemData.backpack.items as |itemRow|}}
                             <div class="inventory-row">
@@ -162,8 +393,8 @@
                             </div>
                         {{/each}}
                         <button class="add-extra-bag-button"><i class="plus icon"></i></button>
-                    </div>'
-                    <div class="ui grid" style="display:block">
+                    </div>
+                    <div style="display:block">
                         {{#each actor.system.extra_bags as |extra_bag|}}
                             <table style="border:none; background:none; width:unset; margin:auto; position:relative">
                                 <tr>
@@ -201,124 +432,19 @@
                             </table>
                         {{/each}}
                     </div>
-                    <div class="ui grid">
-                        <div class="eight wide column">
+                    <div style="display:flex;">
+                        <div style="width:100%; margin:1rem">
                             <button class="landing drop-item item">
                                 DROP
                             </button>
                         </div>
-                        <div class="eight wide column">
+                        <div style="width:100%; margin:1rem">
                             <button class="landing delete-item item">
                                 DELETE
                             </button>
                         </div>
                     </div>
                 </div>
-
-                <!-- EQUIPMENT -->
-                <div class="seven wide column">
-                    <h2 class="actor-tabs-body-header">Equipment</h2>
-                    <div class="ui grid" style="margin-left:auto; margin-right:auto;">
-                        {{#if systemData.equipment.holding.enabled}}
-                        <div class="eight wide column equipment-button">
-                            <div class="equipment-button-component landing" id="equipment-holding" data-document-id="{{systemData.equipment.holding.item}}" style="background-image:url({{actor.system.equipment.holding.img}});">
-                                HOLDING
-                            </div>
-                        </div>
-                        {{/if}}
-                        {{#if systemData.equipment.body.enabled}}
-                        <div class="eight wide column equipment-button ">
-                            <div class="equipment-button-component landing" id="equipment-body" data-document-id="{{systemData.equipment.body.item}}" style="background-image:url({{actor.system.equipment.body.img}});">
-                                BODY
-                            </div>
-                        </div>
-                        {{/if}}
-                        {{#if systemData.equipment.head.enabled}}
-                        <div class="eight wide column equipment-button ">
-                            <div class="equipment-button-component landing" id="equipment-head" data-document-id="{{systemData.equipment.head.item}}" style="background-image:url({{actor.system.equipment.head.img}});">
-                                HEAD
-                            </div>
-                        </div>
-                        {{/if}}
-                        {{#if systemData.equipment.augmentation_artifact.enabled}}
-                        <div class="eight wide column equipment-button ">
-                            <div class="equipment-button-component landing" id="equipment-augmentation-artifact" data-document-id="{{systemData.equipment.augmentation_artifact.item}}" style="background-image:url({{actor.system.equipment.augmentation_artifact.img}});">
-                                AUGMENTATION ARTIFACT
-                            </div>
-                        </div>
-                        {{/if}}
-                        {{#if systemData.equipment.protection_artifact.enabled}}
-                        <div class="eight wide column equipment-button ">
-                            <div class="equipment-button-component landing" id="equipment-protection-artifact" data-document-id="{{systemData.equipment.protection_artifact.item}}" style="background-image:url({{actor.system.equipment.protection_artifact.img}});">
-                                PROTECTION ARTIFACT
-                            </div>
-                        </div>
-                        {{/if}}
-                        {{#each systemData.equipment.powerword_artifacts as |powerword_artifact|}}
-                            {{#if powerword_artifact.enabled}}
-                            <div class="eight wide column equipment-button ">
-                                <div class="equipment-button-component landing" id="equipment-powerword-artifact-{{@index}}" data-document-id="{{systemData.equipment.powerword_artifacts.[@index].item}}" style="background-image:url({{actor.system.equipment.powerword_artifacts.[@index].img}});">
-                                    POWERWORD ARTIFACT
-                                </div>
-                            </div>
-                            {{/if}}
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- SKILLS -->
-        <div class="tab" data-tab="skills" data-group="actor-tabs">
-            <h2 class="actor-tabs-body-header">Skills</h2>
-            <input type="number">Skill points: {{systemData.skillpoints}}</input>
-            <div style="display:grid">
-                {{#each actor.system.skills as |skill|}}
-                    <div style="margin-top:5px; margin-bottom:5px; text-align: center">
-                        <button style="width:unset; min-width:250px; margin-right:20px;" id="actor-{{skill.name}}-roll">{{skill.name}}</button>
-                        <div class="ui icon buttons">
-                            <button class="ui button" style="width:25%" id="actor-{{skill.name}}-decrease"><i class="left arrow icon"></i></button>
-                            <button class="ui disabled button" style="width:50%">{{skill.attribute.roll}}</button>
-                            <button class="ui button" style="width:25%" id="actor-{{skill.name}}-increase"><i class="right arrow icon"></i></button>
-                        </div>
-                    </div>
-                {{/each}}
-            </div>
-        </div>
-
-        <!-- PREPS -->
-        <div class="tab" data-tab="preps" data-group="actor-tabs">
-            <h2 class="actor-tabs-body-header">Preps</h2>
-            <div class="ui grid" style="display:block">
-                {{#each actor.system.preps as |prep|}}
-                <div class="landing prep-drop" data-document-id="{{prep.itemId}}" id="prep {{@index}}">
-                    {{#if prep.itemId}}
-                        <img src="{{prep.img}}" style="width:40px; height:40px; margin-right:20px;"/>
-                        <button id="prep {{@index}}" class="prep-button">{{prep.name}}</button>
-                        <button class="delete-prep" style="width:40px; height:40px; margin-left:10px;"><i class="trash icon" style="margin:0"></i></button>
-                    {{else}}
-                        <img style="width:40px; height:40px; margin-right:20px;"/>
-                        <button class="prep-button" id="prep {{@index}}"></button>
-                    {{/if}}
-                </div>
-                {{/each}}
-            </div>
-        </div>
-        <!-- CONDITIONS -->
-        <div class="tab" data-tab="conditions" data-group="actor-tabs">
-            <h2 class="actor-tabs-body-header">Conditions</h2>
-            <div style="display:block">
-                <div class="landing condition-drop">Drop conditions here <i class="caret down icon" style="margin:0"></i></div>
-                {{#if actor.system.conditions.length}}
-                    {{#each actor.system.conditions as |condition|}}
-                    <div class="condition-item" style="display:flex; margin-top:2px; margin-bottom:2px;" data-document-id="{{condition.itemId}}">
-                        <img src="{{condition.img}}" style="width:30px; height:30px; margin-right:20px;"/>
-                        <button class="condition-button">{{condition.name}}</button>
-                        <button class="delete-condition" style="width:30px; height:30px; margin-left:10px;"><i class="trash icon" style="margin:0"></i></button>
-                    </div>
-                    {{/each}}
-                {{/if}}
             </div>
         </div>
     </div>

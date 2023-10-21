@@ -8,6 +8,7 @@ import { equipmentActivateListeners, equipmentOnDragOver, equipmentOnDrop, equip
 import { prepActivateListeners, prepOnDrop } from "../../components/services/prep.service.js";
 import { conditionActivateListeners, conditionOnDrop } from "../../components/services/condition.service.js";
 import { extraBagActivateListeners, extraBagOnDragOver, extraBagOnDragStart, extraBagOnDrop } from "../../components/services/extra.bags.service.js";
+import { rollDice } from "../../components/dice.roll.function.js";
 
 
 export default class ITZCoreCharacterSheet extends ActorSheet {
@@ -37,7 +38,7 @@ export default class ITZCoreCharacterSheet extends ActorSheet {
         initBackpackSpace(context.systemData, this.actor);
         this._initProtectiveDice();
         initSanityDice(this.actor);
-        initSkills(this.actor);
+        initSkills(this);
 
         this.actor.tab = "actions";
 
@@ -56,7 +57,7 @@ export default class ITZCoreCharacterSheet extends ActorSheet {
         /**
          * roll protection dices
          */
-        DAMAGE_TYPES.forEach(type => html.find(`#actor-${type}-protection-roll`).click(() => this.actor.roll[type].rollTheDice()));
+        DAMAGE_TYPES.forEach(type => html.find(`#actor-${type}-protection-roll`).click(() => rollDice(this.actor.roll[type].roll)));
 
         backpackActivateListeners(html,this);
         equipmentActivateListeners(html,this);

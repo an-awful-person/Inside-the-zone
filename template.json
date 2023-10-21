@@ -23,100 +23,73 @@
                         "name":"crafting",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
                         "name":"alertness",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
-                        "name":"wilderness knowledge",
+                        "name":"wilderness-knowledge",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
-                        "name":"anomaly knowledge",
+                        "name":"anomaly-knowledge",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
-                        "name":"scientific knowledge",
+                        "name":"scientific-knowledge",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
                         "name":"cooking",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
                         "name":"medicine",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
                         "name":"hunting",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
                         "name":"strength",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
                         "name":"agility",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
                     },
                     {
                         "name":"charismatic",
                         "value":0,
                         "min":0,
-                        "max":5,
-                        "boons":[],
-                        "banes":[],
-                        "addition":""
+                        "max":5
+                    },
+                    {
+                        "name":"stealth",
+                        "value":0,
+                        "min":0,
+                        "max":5
                     }
                 ],
                 "preps":[
@@ -246,8 +219,16 @@
                     "item":"",
                     "img":""
                 },
-                "powerword_artifacts":[
-                ]
+                "powerword_artifacts_1":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "powerword_artifacts_2":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                }
             }
         },
         "medium": {
@@ -276,8 +257,16 @@
                     "item":"",
                     "img":""
                 },
-                "powerword_artifacts":[
-                ],
+                "powerword_artifacts_1":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
+                "powerword_artifacts_2":{
+                    "enabled":true,
+                    "item":"",
+                    "img":""
+                },
                 "protection_artifact":{
                     "enabled":true,
                     "item":"",
