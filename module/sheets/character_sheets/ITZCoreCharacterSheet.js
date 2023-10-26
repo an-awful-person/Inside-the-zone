@@ -57,7 +57,12 @@ export default class ITZCoreCharacterSheet extends ActorSheet {
         /**
          * roll protection dices
          */
-        DAMAGE_TYPES.forEach(type => html.find(`#actor-${type}-protection-roll`).click(() => rollDice(this.actor.roll[type].roll)));
+        DAMAGE_TYPES.forEach(type => html.find(`.actor-${type}-protection-roll`).click(() => rollDice(this.actor.system.protection[type])));
+        DAMAGE_TYPES.forEach(type => html.find(`.actor-${type}-protection-input`).change((e) => { 
+            this.actor.system.protection[type] = e.target.value;
+            this.actor.update({[`system.protection.${type}`]: this.actor.system.protection[type]});
+        }));
+        
 
         backpackActivateListeners(html,this);
         equipmentActivateListeners(html,this);

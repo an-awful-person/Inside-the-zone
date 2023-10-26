@@ -118,6 +118,14 @@
                 "conditions":[],
                 "actions":[],
                 "reactions":[],
+                "protection":{
+                    "physical":"0",
+                    "ballistic":"0",
+                    "burning":"0",
+                    "freezing":"0",
+                    "decay":"0",
+                    "sanity":"1d6"
+                },
                 "movement":20,
                 "skillpoints":0,
                 "money":0
