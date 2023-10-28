@@ -30,5 +30,5 @@ export const DAMAGE_TYPES = [
     'burning',
     'freezing',
     'decay',
-    'mind'
+    'sanity'
 ]
