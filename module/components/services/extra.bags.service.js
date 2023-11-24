@@ -1,6 +1,6 @@
 import {BackpackItem} from "../backpack.item.component.js";
 import {ITEM_ICON_SIZE} from "../../constants.js";
-import {removeAllItemTraces} from "./drag.and.drop.utils.service.js";
+import {hideDropAndDeleteButtons, removeAllItemTraces, showDropAndDeleteButtons} from "./drag.and.drop.utils.service.js";
 
 const EXTRA_BAG_ADD_BUTTON = "add-extra-bag-button";
 const EXTRA_BAG_CHANGE_HEIGHT = "extra-bag-height-";
@@ -46,9 +46,7 @@ export function extraBagActivateListeners(html, sheet) {
                     _onClickOpenItem(e, sheet.actor)
                 });
                 html.find(`#extra-bag-button_${yIndex}-${xIndex}`).on('dragend', () => {
-                    const actorSheet = sheet.actor.sheet;
-                    actorSheet.element[0].querySelector('.drop-item').style.visibility = 'hidden';
-                    actorSheet.element[0].querySelector('.delete-item').style.visibility = 'hidden';
+                    hideDropAndDeleteButtons(sheet);
                 })
             })
         })
@@ -189,9 +187,7 @@ export function extraBagOnDragStart(event, sheet) {
     // Set data transfer
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
 
-    const actorSheet = sheet.actor.sheet;
-    actorSheet.element[0].querySelector('.drop-item').style.visibility = 'visible';
-    actorSheet.element[0].querySelector('.delete-item').style.visibility = 'visible';
+    showDropAndDeleteButtons(sheet);
 }
 
 /**
@@ -299,7 +295,7 @@ async function _onDropItem(event, data, sheet) {
 
     const element = event.toElement;
 
-    if (item.type == "item") {
+    if (item.type == "item" || item.type == "weapon") {
 
         if (element.classList.contains('extra-bag')) {
             const width = item.system.width;

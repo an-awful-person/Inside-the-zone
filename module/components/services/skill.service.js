@@ -15,6 +15,18 @@ export function skillActivateListeners(html, sheet) {
             });
         })
     }
+
+    html.find(".actor-skillpoints-decrease").click(() => {
+        sheet.actor.system.skillpoints--;
+        sheet.actor.update({[`system.skillpoints`]: sheet.actor.system.skillpoints});
+        sheet.render(false);
+    })
+
+    html.find(".actor-skillpoints-increase").click(() => {
+        sheet.actor.system.skillpoints++;
+        sheet.actor.update({[`system.skillpoints`]: sheet.actor.system.skillpoints});
+        sheet.render(false);
+    })
 }
 
 /**

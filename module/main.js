@@ -2,6 +2,7 @@ import ITZItemSheet from "./sheets/item_sheets/ITZItemSheet.js";
 import ITZCoreCharacterSheet  from "./sheets/character_sheets/ITZCoreCharacterSheet.js";
 import ITZItemDirectory from "./directories/ITZItemDirectory.js";
 import ITZPrepSheet from "./sheets/item_sheets/ITZPrepSheet.js";
+import ITZWeaponSheet from "./sheets/item_sheets/ITZWeaponSheet.js";
 import ITZConditionSheet from "./sheets/item_sheets/ITZConditionSheet.js";
 
 Hooks.once("init", async function(){
@@ -16,6 +17,7 @@ function initSheets(){
     console.log("Inside the zone | Initializing Templates");
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("inside-the-zone", ITZItemSheet, { types: ['item'], makeDefault : true}); 
+    Items.registerSheet("inside-the-zone", ITZWeaponSheet, { types: ['weapon']}); 
     Items.registerSheet("inside-the-zone", ITZPrepSheet, { types: ['prep']}); 
     Items.registerSheet("inside-the-zone", ITZConditionSheet, { types: ['condition']}); 
 

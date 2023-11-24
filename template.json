@@ -6,17 +6,23 @@
                 "health":{
                     "value":5,
                     "min":0,
-                    "max":5
+                    "max":5,
+                    "percentage":"100%",
+                    "reverse_percentage":"0%"
                 },
                 "stress":{
-                    "value":10,
+                    "value":0,
                     "min":0,
-                    "max":10
+                    "max":10,
+                    "percentage":"0%",
+                    "reverse_percentage":"100%"
                 },
                 "sanity":{
                     "value":5,
                     "min":0,
-                    "max":5
+                    "max":5,
+                    "percentage":"100%",
+                    "reverse_percentage":"0%"
                 },
                 "skills":[
                     {
@@ -128,7 +134,8 @@
                 },
                 "movement":20,
                 "skillpoints":0,
-                "money":0
+                "money":0,
+                "description":"Describe the character here."
             }
         },
         "soldier": {
@@ -289,7 +296,7 @@
         }
     },
     "Item":{
-        "types": ["item", "prep", "condition"],
+        "types": ["item", "prep", "condition", "weapon"],
         "templates":{
             "baseItem":{
                 "description":"Base useable item. Used as medicine or as component of another item or for roleplay properties."
@@ -300,7 +307,62 @@
             "broken":false,
             "width":1,
             "height":1,
-            "uses":-1
+            "hasUses":false,
+            "uses":{
+                "value":0,
+                "min":0,
+                "max":0
+            },
+            "price":0
+        },
+        "weapon": {
+            "templates":["baseItem"],
+            "broken":false,
+            "width":1,
+            "height":1,
+            "hasUses":false,
+            "uses":{
+                "value":0,
+                "min":0,
+                "max":0
+            },
+            "price":0,
+            "hasAmmo":true,
+            "ammo":{
+                "id":"",
+                "img":""
+            },
+            "rounds":{
+                "value":0,
+                "min":0,
+                "max":0
+            },
+            "actions":[
+                {
+                    "name":"melee attack",
+                    "roll":"0",
+                    "usesAmmo":0,
+                    "damageType":"physical"
+                },
+                {
+                    "name":"short range attack",
+                    "roll":"0",
+                    "usesAmmo":1,
+                    "damageType":"ballistic"
+                },
+                {
+                    "name":"medium range attack",
+                    "roll":"0",
+                    "usesAmmo":1,
+                    "damageType":"ballistic"
+                },
+                {
+                    "name":"long range attack",
+                    "roll":"0",
+                    "usesAmmo":1,
+                    "damageType":"ballistic"
+                }
+            ]
         },
         "prep":{
             "templates":["baseItem"],

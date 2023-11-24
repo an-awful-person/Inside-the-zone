@@ -48,5 +48,69 @@ export default class ITZItemSheet extends ItemSheet {
             html.find(".description-display")[0].innerHTML = marked.parse(this.item.system.description);
             this.render(false);
         });
+
+        html.find(".uses-toggle").change(e => {
+            this.item.system.hasUses = e.target.checked;
+            e.currentTarget.checked = this.item.system.hasUses;
+            this.item.update({ [`system.hasUses`] : this.item.system.hasUses});
+            this.render(false);
+        })
+
+        html.find(".broken-toggle").change(e => {
+            this.item.system.broken = e.target.checked;
+            e.currentTarget.checked = this.item.system.broken;
+            this.item.update({ [`system.broken`] : this.item.system.broken});
+            this.render(false);
+        })
+
+        html.find(".decrease-uses-button").click(e => {
+            const uses = this.item.system.uses;
+            if (uses.value > uses.max){
+                uses.value = uses.max;
+            } else if (uses.value > uses.min) {
+                uses.value--;
+            } else {
+                uses.value = uses.min;
+            }
+            this.item.update({ [`system.uses.value`]: uses.value })
+            this.render(false);
+        })
+
+        html.find(".increase-uses-button").click(e => {
+            const uses = this.item.system.uses;
+            if(uses.value < uses.min){
+                uses.value = uses.min;
+            } else if (uses.value < uses.max) {
+                uses.value++;
+            } else {
+                uses.value = uses.max;
+            }
+            this.item.update({ [`system.uses.value`]: uses.value })
+            this.render(false);
+        })
+
+        html.find(".uses-input").change(e => {
+            const value = e.target.valueAsNumber;
+            const max = this.item.system.uses.max;
+            const min = this.item.system.uses.min;
+            if(value > max){
+                this.item.system.uses.value = max;
+            } else if (value < min){
+                this.item.system.uses.value = min;
+            } else {
+                this.item.system.uses.value = value;
+            }            
+            this.item.update({[`system.uses.value`]: this.item.system.uses.value});
+        })
+
+        html.find(".uses-max-input").change(e => {
+            this.item.system.uses.max = e.target.valueAsNumber;
+            this.item.update({[`system.uses.max`]: this.item.system.uses.max});
+        })
+
+        html.find(".change-price").change(e => {
+            this.item.system.price = e.target.valueAsNumber;
+            this.item.update({['system.price']: this.item.system.price});
+        })
     }
 }

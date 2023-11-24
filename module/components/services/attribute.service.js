@@ -7,14 +7,33 @@ export function attributeActiveListener(html, sheet) {
      * increase or decrease stat
      */
     Object.values(STATS).forEach(stat => {
-        html.find(`#decrease-${stat}-button`).on("click", () => {
+        html.find(`.decrease-${stat}-button`).on("click", () => {
             _decreaseStat(stat, sheet)
             sheet.actor.image_class[stat] = _changeImageClass(sheet.actor.system[stat]);
         });
-        html.find(`#increase-${stat}-button`).on("click", () => {
+        html.find(`.increase-${stat}-button`).on("click", () => {
             _increaseStat(stat, sheet)
             sheet.actor.image_class[stat] = _changeImageClass(sheet.actor.system[stat]);
         });
+
+        html.find(`.${stat}-input`).change(e => {
+            const value = e.target.valueAsNumber;
+            if(value > sheet.actor.system[stat].max){
+                sheet.actor.system[stat].value = sheet.actor.system[stat].max;
+            } else if (value < sheet.actor.system[stat].min){
+                sheet.actor.system[stat].value = sheet.actor.system[stat].min;
+            } else {
+                sheet.actor.system[stat].value = value;
+            }
+
+            _createStatPercentage(sheet.actor, stat);            
+            sheet.actor.update({[`system.${stat}.value`]: sheet.actor.system[stat].value});
+        })
+
+        html.find(`.${stat}-max-input`).change(e => {
+            sheet.actor.system[stat].max = e.target.valueAsNumber;
+            sheet.actor.update({[`system.${stat}.max`]: sheet.actor.system[stat].max});
+        })
     })
 
     /**
@@ -30,11 +49,14 @@ export function attributeActiveListener(html, sheet) {
  */
 function _increaseStat(statName, sheet) {
     const stat = sheet.actor.system[statName];
-    if (stat.value < stat.max) {
+    if(stat.value < stat.min){
+        stat.value = stat.min;
+    } else if (stat.value < stat.max) {
         stat.value++;
     } else {
         stat.value = stat.max;
     }
+    _createStatPercentage(sheet.actor, statName);
     sheet.actor.update({ [`system.${statName}.value`]: stat.value })
     sheet.render(false);
 }
@@ -46,13 +68,31 @@ function _increaseStat(statName, sheet) {
  */
 function _decreaseStat(statName, sheet) {
     const stat = sheet.actor.system[statName];
-    if (stat.value > stat.min) {
+    if (stat.value > stat.max){
+        stat.value = stat.max;
+    } else if (stat.value > stat.min) {
         stat.value--;
     } else {
         stat.value = stat.min;
     }
+    _createStatPercentage(sheet.actor, statName);
     sheet.actor.update({ [`system.${statName}.value`]: stat.value })
     sheet.render(false);
+}
+
+/**
+ * @private
+ * @param {STATS} stat 
+ */
+export function _createStatPercentage(actor, stat){
+    const value = actor.system[stat].value;
+    const max = actor.system[stat].max;
+    const percentage = `${(value/max)*100}%`;
+    const reverse_percentage = `${(1-(value/max))*100}%`;
+    actor.system[stat].percentage = percentage;
+    actor.system[stat].reverse_percentage = reverse_percentage;
+    actor.update({[`system.${stat}.percentage`]: actor.system[stat].percentage});
+    actor.update({[`system.${stat}.reverse_percentage`]: actor.system[stat].reverse_percentage});
 }
 
 /**

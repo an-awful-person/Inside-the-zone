@@ -1,5 +1,8 @@
 import { ITEM_ICON_SIZE } from "../../constants.js";
-import { removeAllItemTraces } from "./drag.and.drop.utils.service.js";
+import { hideDropAndDeleteButtons, removeAllItemTraces, showDropAndDeleteButtons } from "./drag.and.drop.utils.service.js";
+
+const EQUIPMENT_BUTTON_COMPONENT = 'equipment-button-component';
+const EQUIPMENT_ICON = 'equipment-icon';
 
 /**
  * 
@@ -7,26 +10,31 @@ import { removeAllItemTraces } from "./drag.and.drop.utils.service.js";
  * @param {ActorSheet} sheet 
  */
 export function equipmentActivateListeners(html, sheet) {
-    html.find('.equipment-button-component').click((e) => {
-        _onClickOpenItem(e, sheet.actor);
+    html.find(`.${EQUIPMENT_BUTTON_COMPONENT}`).click((e) => {
+        _onClickOpenItem(e.currentTarget, sheet.actor);
     })
 
-    html.find('.equipment-button-component').on('dragend', () => {
-        const actorSheet = sheet.actor.sheet;
-        actorSheet.element[0].querySelector('.drop-item').style.visibility = 'hidden';
-        actorSheet.element[0].querySelector('.delete-item').style.visibility = 'hidden';
+    html.find(`.${EQUIPMENT_BUTTON_COMPONENT}`).on('dragend', () => {
+        hideDropAndDeleteButtons(sheet);
+    })
+
+    html.find(`.${EQUIPMENT_ICON}`).click((e) => {
+        _onClickOpenItem(e.parentElement, sheet.actor);
+    })
+
+    html.find(`.${EQUIPMENT_ICON}`).on('dragend', () => {
+        hideDropAndDeleteButtons(sheet);
     })
 }
 
 /**
  * Handle opening a single compendium entry by invoking the configured document class and its sheet
- * @param {MouseEvent} event      The originating click event
+ * @param {HTMLElement} target      target element
  * @param {Actor} actor
  * @private
  */
-async function _onClickOpenItem(event, actor) {
-    let li = event.currentTarget;
-    const document = actor.items.get(li.dataset.documentId);
+async function _onClickOpenItem(target, actor) {
+    const document = actor.items.get(target.dataset.documentId);
     const sheet = document.sheet;
     if (sheet._minimized) return sheet.maximize();
     else return sheet.render(true);
@@ -40,10 +48,10 @@ async function _onClickOpenItem(event, actor) {
 export function equipmentOnDragStart(event, sheet) {
     if (event.target.classList.contains("content-link")) return;
 
-    const li = event.currentTarget;
+    const li = event.target.classList.contains(EQUIPMENT_ICON) ? event.parentElement : event.currentTarget;
     let dragData;
 
-    if (li.classList.contains('equipment-button-component')) {
+    if (li.classList.contains(EQUIPMENT_BUTTON_COMPONENT) || li.classList.contains(EQUIPMENT_ICON)) {
         if (li.dataset.documentId) {
             const item = sheet.actor.items.get(li.dataset.documentId);
             dragData = item.toDragData();
@@ -62,14 +70,12 @@ export function equipmentOnDragStart(event, sheet) {
     // Set data transfer
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
 
-    const actorSheet = sheet.actor.sheet;
-    actorSheet.element[0].querySelector('.drop-item').style.visibility = 'visible';
-    actorSheet.element[0].querySelector('.delete-item').style.visibility = 'visible';
+    showDropAndDeleteButtons(sheet);
 }
 
 export function equipmentOnDragOver(event, sheet) {
     const lt = sheet.lastDragStartTarget;
-    if (lt != undefined && lt.classList.contains('equipment-button-component')) {
+    if (lt != undefined && (lt.classList.contains(EQUIPMENT_BUTTON_COMPONENT) || lt.classList.contains(EQUIPMENT_ICON))) {
         if (lt.dataset.documentId) {
             var item = sheet.actor.items.get(lt.dataset.documentId);
             if (item == undefined) {
@@ -169,11 +175,14 @@ async function _onDropItem(event, data, sheet) {
     const item = await Item.implementation.fromDropData(data);
     const itemData = item.toObject();
 
-    const element = event.toElement;
+    var element = event.toElement;
 
-    if (item.type == "item") {
+    if (item.type == "item" || item.type == "weapon") {
 
-        if (element.classList.contains('equipment-button-component')) {
+        if (element.classList.contains(EQUIPMENT_BUTTON_COMPONENT) || element.classList.contains(EQUIPMENT_ICON)) {
+            if(element.classList.contains(EQUIPMENT_ICON)){
+                element = element.parentElement;
+            }
             const sameItemId = item.id;
             const equipment = sheet.actor.system.equipment;
 
@@ -267,22 +276,13 @@ async function _onDropItemCreate(itemData, sheet) {
 export function cleanSweepEquipmentItem(actor, itemId, remove = true) {
     const equipment = actor.system.equipment;
 
-    const equipmentLocations = ['holding', 'body', 'head', 'augmentation_artifact', 'protection_artifact']
+    const equipmentLocations = ['holding', 'body', 'head', 'augmentation_artifact', 'protection_artifact', 'powerword_artifacts_1', 'powerword_artifacts_2']
     equipmentLocations.forEach(location => {
         if (equipment[location] && equipment[location].item == itemId) {
             equipment[location].item = '';
             equipment[location].img = '';
         }
     })
-
-    if (equipment.powerword_artifacts) {
-        equipment.powerword_artifacts.forEach(artifact => {
-            if (artifact.item == itemId) {
-                artifact.item = '';
-                artifact.img = '';
-            }
-        })
-    }
 
     actor.system.equipment = equipment;
     actor.update({ ['system.equipment']: actor.system.equipment });

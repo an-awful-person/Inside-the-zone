@@ -13,3 +13,27 @@ export function removeAllItemTraces(actor, itemId){
     cleanSweepExtraBagsItem(actor,itemId, false);
     actor.items.get(itemId).delete();
 }
+
+/**
+ * 
+ * @param {ActorSheet} sheet 
+ */
+export function showDropAndDeleteButtons(sheet){
+    const actorSheet = sheet.actor.sheet;
+    actorSheet.element[0].querySelector('.drop-item').style.visibility = 'visible';
+    actorSheet.element[0].querySelector('.drop-item').style.height = '50px';
+    actorSheet.element[0].querySelector('.delete-item').style.visibility = 'visible';
+    actorSheet.element[0].querySelector('.delete-item').style.height = '50px';
+}
+
+/**
+ * 
+ * @param {ActorSheet} sheet 
+ */
+export function hideDropAndDeleteButtons(sheet){
+    const actorSheet = sheet.actor.sheet;
+                actorSheet.element[0].querySelector('.drop-item').style.visibility = 'hidden';
+                actorSheet.element[0].querySelector('.drop-item').style.height = '0px';
+                actorSheet.element[0].querySelector('.delete-item').style.visibility = 'hidden';
+                actorSheet.element[0].querySelector('.delete-item').style.height = '0px';
+}

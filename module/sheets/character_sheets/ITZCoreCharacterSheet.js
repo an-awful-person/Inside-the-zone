@@ -24,7 +24,7 @@ export default class ITZCoreCharacterSheet extends ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             template: `systems/inside-the-zone/templates/sheets/character sheets/core-character-sheet.html`,
-            tabs: [{ navSelector: ".actor-tabs", contentSelector: ".actor-tabs-body", initial: "actions" }],
+            tabs: [{ navSelector: ".actor-tabs", contentSelector: ".actor-tabs-body", initial: "inventory" }, { navSelector: ".actor-description-tabs", contentSelector: ".actor-description-tabs-body", initial: "display" }],
             dragDrop: [{ dragSelector: ".item-list .item", dropSelector: ".landing" }, { dragSelector: ".landing", dropSelector: ".landing" }],
         })
     }
@@ -62,7 +62,24 @@ export default class ITZCoreCharacterSheet extends ActorSheet {
             this.actor.system.protection[type] = e.target.value;
             this.actor.update({[`system.protection.${type}`]: this.actor.system.protection[type]});
         }));
+
+        html.find('.actor-money-input').change(e => {
+            this.actor.system.money = e.target.valueAsNumber;
+            this.actor.update({'system.money': this.actor.system.money});
+            this.render(false);
+        })
         
+
+        html.find(".description-display")[0].innerHTML = marked.parse(this.actor.system.description);
+        
+        /**
+         * change description
+         */
+        html.find(".description").change(e => {
+            this.actor.update({ [`system.description`]: e.target.value });
+            html.find(".description-display")[0].innerHTML = marked.parse(this.actor.system.description);
+            this.render(false);
+        });
 
         backpackActivateListeners(html,this);
         equipmentActivateListeners(html,this);
