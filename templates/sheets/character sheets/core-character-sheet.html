@@ -535,8 +535,13 @@
                                     class="trash icon" style="margin:0"></i></button>
                             {{else}}
                             <!-- <img style="width:40px; height:40px; margin-right:20px;" /> -->
-                            <button class="prep-button" id="prep {{@index}}"
+                            {{#if @index}}
+                                <button class="prep-button" id="prep {{@index}}"
                                 style="background-image: url(./systems/inside-the-zone/assets/img/web/preps_empty_button.png); background-size: 100% 100%; background-repeat: no-repeat;"></button>
+                                {{else}}
+                                <button class="prep-button" id="prep {{@index}}"
+                                    style="background-image: url(./systems/inside-the-zone/assets/img/web/preps_empty_button.png); background-size: 100% 100%; background-repeat: no-repeat;" title="Meant for the 'class action' starter prep">CLASS ACTION</button>
+                                {{/if}}
                             {{/if}}
                         </div>
                         {{/each}}
